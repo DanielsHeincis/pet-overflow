@@ -8,13 +8,13 @@ script/source = "extends Node
 func _ready():
 	# Configure pet properties
 	var pet = get_parent()
-	pet.pet_name = \"Time\"
-	pet.draggable = true
+	pet.pet_name = \"Concept of Time\"
+	pet.draggable = false
 	pet.moves_by_itself = true
 	pet.hates_being_moved = true
-	# Time loves food and toys, hates blankets
-	pet.preferred_objects = [\"FoodBowl\", \"Toy\"]
-	pet.forbidden_objects = [\"Blanket\"]
+	# Time only loves hour glass, hates everything else
+	pet.preferred_objects = [\"hour_glass\"]
+	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Toy\", \"water_glass\", \"card_deck\", \"gameboy\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"puddle\"]
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.15  # Gets unsatisfied quickly
 	pet.wrath_increase_rate = 0.05
@@ -45,7 +45,17 @@ shape = SubResource("CircleShape2D_usvai")
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="ClockFace" type="CircleShape2D" parent="Sprite"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 radius = 45.0
+script = null
 
 [node name="ClockBody" type="Polygon2D" parent="Sprite"]
 color = Color(0.6, 0.6, 0.6, 1)
@@ -92,7 +102,6 @@ default_color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="EyeLeft" type="Polygon2D" parent="Sprite"]
 position = Vector2(-15, -15)
-color = Color(1, 1, 1, 1)
 polygon = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
 
 [node name="PupilLeft" type="Polygon2D" parent="Sprite"]
@@ -102,7 +111,6 @@ polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 
 [node name="EyeRight" type="Polygon2D" parent="Sprite"]
 position = Vector2(15, -15)
-color = Color(1, 1, 1, 1)
 polygon = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
 
 [node name="PupilRight" type="Polygon2D" parent="Sprite"]

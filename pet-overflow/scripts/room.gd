@@ -31,11 +31,16 @@ var object_scenes = {}
 
 # Object spawn rates (higher number = more likely to spawn)
 var object_spawn_rates = {
-	"Ball": 1.0,
 	"Bath": 0.5,  # Less common since it's a special zone
-	"Blanket": 0.8,
-	"FoodBowl": 0.7,
-	"Toy": 0.9
+	"WaterGlass": 0.5,
+	"CardDeck": 0.5,
+	"Gameboy": 0.5,
+	"HourGlass": 0.5,
+	"JamJar": 0.5,
+	"OutsideDoor": 0.5,
+	"Puddle": 0.5,
+	"Toast": 0.5,
+	"WoodenSpoon": 0.5
 }
 
 # Spawn points
@@ -134,11 +139,17 @@ func spawn_random_pet():
 
 func load_object_scenes():
 	# Load scenes manually to avoid preload errors
-	object_scenes["Ball"] = load("res://scenes/objects/ball.tscn")
 	object_scenes["Bath"] = load("res://scenes/objects/bath.tscn")
-	object_scenes["Blanket"] = load("res://scenes/objects/blanket.tscn")
-	object_scenes["FoodBowl"] = load("res://scenes/objects/food_bowl.tscn")
-	object_scenes["Toy"] = load("res://scenes/objects/toy.tscn")
+	object_scenes["WaterGlass"] = load("res://scenes/objects/water_glass.tscn")
+	object_scenes["CardDeck"] = load("res://scenes/objects/card_deck.tscn")
+	object_scenes["Gameboy"] = load("res://scenes/objects/gameboy.tscn")
+	object_scenes["HourGlass"] = load("res://scenes/objects/hour_glass.tscn")
+	object_scenes["JamJar"] = load("res://scenes/objects/jam_jar.tscn")
+	object_scenes["OutsideDoor"] = load("res://scenes/objects/outside_door.tscn")
+	object_scenes["Puddle"] = load("res://scenes/objects/puddle.tscn")
+	object_scenes["Toast"] = load("res://scenes/objects/toast.tscn")
+	object_scenes["WoodenSpoon"] = load("res://scenes/objects/wooden_spoon.tscn")
+
 
 
 func spawn_random_object():

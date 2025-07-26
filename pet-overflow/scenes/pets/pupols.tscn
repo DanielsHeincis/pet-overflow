@@ -8,19 +8,20 @@ script/source = "extends Node
 func _ready():
 	# Configure pet properties
 	var pet = get_parent()
-	pet.pet_name = \"Pupols\"
+	pet.pet_name = \"Gambling addict Pupols\"
 	pet.draggable = true
 	pet.hates_being_moved = true
 	pet.moves_by_itself = false
 	# Pupols loves playing cards, hates everything else (especially water/bath)
-	pet.preferred_objects = [\"Toy\"] # Using Toy for card deck until we have a specific card deck object
-	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\"] # Bath (water) is particularly hated
+	pet.preferred_objects = [\"card_deck\"] 
+	pet.forbidden_objects = [\"Bath\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"gameboy\"] 
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.12
 	pet.wrath_increase_rate = 0.08
 	# Make sprite a nice blue color
 	if pet.has_node(\"Sprite/ColorRect\"):
-		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.4, 0.8)"
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.4, 0.8)
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
 radius = 50.0

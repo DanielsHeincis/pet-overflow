@@ -16,8 +16,8 @@ func _ready():
 	pet.draggable = true
 	pet.moves_by_itself = false
 	pet.hates_being_moved = false
-	pet.preferred_objects = [\"Bath\"]
-	pet.forbidden_objects = [\"Toy\", \"Ball\", \"Blanket\", \"FoodBowl\"]
+	pet.preferred_objects = [\"water_glass\"]
+	pet.forbidden_objects = [\"Toy\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Bath\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\"]
 	pet.satisfaction_decay_rate = 0.05
 	pet.wrath_increase_rate = 0.2"
 

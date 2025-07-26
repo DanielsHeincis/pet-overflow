@@ -27,6 +27,32 @@ Gameplay:
 - Player can die either if one pets satisfaction bar overflow or the wrath bar overflows triggering a death scene. The death scene will be a cutscene, but for starters leave it as text on screen.
 - Objects that pets need to interact with will be randomly spawned with random counts every certain period, like specific minute or event, when a new pet is spawned.
 
+Controls:
+- Player can move the camera to left and right with arrow keys or WASD.
+- Player can hover over an object to interact with it.
+- Player can click and drag an object to interact with it.
+- Player can click and drag a pet to interact with it.
+- Player can click on a pet to toggle its satisfaction and wrath meters for a few seconds.
+
+Physics:
+- Objects are affected by gravity.
+- Pets are affected by gravity.
+- Pets can walk through objects but can collide based on the conditions.
+- Pets can move by themselves.
+
+Cutscenes:
+- Death scene. Happy or Sad.
+- Pet satisfaction scene.
+- Pet wrath scene.
+- Game finish scene.
+
+Game finish:
+- All pets are spawned.
+- All objects are spawned.
+- All pets are satisfied enough for one minute.
+- All pets are not overangered.
+- All pets are not oversatisfied.
+
 Character:
 - No physical body.
 - Mouse has 3 states - interactable, holding creature, freehand.
@@ -59,34 +85,33 @@ Objects:
 Animations:
 - Spending time with the pet is in a 400x200 animation screen where a scene is played
 
-> v3 addition
 Pets:
 - Lamont the wet owl:
-    - Satisfaction: Water
+    - Satisfaction: water_glass
     - Wrath: Everything else
+    - No effect on: puddle
     - Movement: Can be moved, Stays in one place
 - Concept of Time:
-    - Satisfaction: Time (hour glass)
+    - Satisfaction: hour_glass
     - Wrath: Everything else
     - Movement: Can't be moved, Moves (floats) by itself
     - Sates: If angry, instead of the color it is filled with flashing images of handsigns, if happy, kitties.
     - Nature: If angry, it runs out of the camera view and is FAST!!!
 - Gambling addict Pupols:
-    - Satisfaction: Playing cards (card deck)
+    - Satisfaction: card_deck
     - Wrath: Everything else, but water in particular(water glass, bath, puddles)
     - Movement: Can be moved, Hates being moved
 - Julijas dators:
-    - Satisfaction: Jam, wooden spoons, gameboys <3 (jam jar, wooden spoon, gameboy)
+    - Satisfaction: jam_jar, wooden_spoon, gameboy
     - Wrath: Everything else, but water in particular (water glass, bath, puddles)
     - Movement: Can be moved, Stays in a single place
     - Lowest spawn rate
 - Toaster:
-    - Satisfaction: Toast, Walks
+    - Satisfaction: toast, outside_door
     - Wrath: Everything else
     - Movement: Can be moved, Stays in a single place
     - Highest spawn rate
 
-> v3 addition
 Objects:
 - Jam Jar:
     - Movable
@@ -176,7 +201,6 @@ Interaction nature:
     - [ ] Visualize it, add a timer on top of it
 
 
-> v3 addition
 Game intesity:
 - The more pets, the angrier they get
 - The more pets, the faster they move

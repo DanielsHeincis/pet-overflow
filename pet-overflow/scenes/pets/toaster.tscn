@@ -12,9 +12,9 @@ func _ready():
 	pet.draggable = true
 	pet.moves_by_itself = false
 	pet.hates_being_moved = false
-	# Toaster loves toast and walks
-	pet.preferred_objects = [\"FoodBowl\", \"Toy\"] # Using FoodBowl for toast
-	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\"]
+	# Toaster loves toast and outside door (walks)
+	pet.preferred_objects = [\"toast\", \"outside_door\"]
+	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Toy\", \"water_glass\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"wooden_spoon\", \"puddle\"]
 	# Highest spawn rate as per README
 	# To be implemented in spawn manager
 	# Custom satisfaction and wrath rates
@@ -113,8 +113,6 @@ color = Color(0.2, 0.2, 0.2, 1)
 offset_left = -25.0
 offset_top = -10.0
 offset_right = -15.0
-offset_bottom = 0.0
-color = Color(1, 1, 1, 1)
 
 [node name="PupilLeft" type="ColorRect" parent="Sprite"]
 offset_left = -22.0
@@ -127,8 +125,6 @@ color = Color(0, 0, 0, 1)
 offset_left = 15.0
 offset_top = -10.0
 offset_right = 25.0
-offset_bottom = 0.0
-color = Color(1, 1, 1, 1)
 
 [node name="PupilRight" type="ColorRect" parent="Sprite"]
 offset_left = 18.0

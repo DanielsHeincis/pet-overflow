@@ -8,13 +8,13 @@ script/source = "extends Node
 func _ready():
 	# Configure pet properties
 	var pet = get_parent()
-	pet.pet_name = \"Julija\"
+	pet.pet_name = \"Julijas dators\"
 	pet.draggable = true
 	pet.hates_being_moved = false
 	pet.moves_by_itself = false
-	# Julija loves jam, wooden spoons, gameboys
-	pet.preferred_objects = [\"FoodBowl\", \"Toy\"] # Using FoodBowl for jam and Toy as a stand-in for gameboy
-	pet.forbidden_objects = [\"Bath\"] # Doesn't particularly hate anything
+	# Julija loves jam jar, wooden spoons, gameboys
+	pet.preferred_objects = [\"jam_jar\", \"wooden_spoon\", \"gameboy\"]
+	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Toy\", \"water_glass\", \"card_deck\", \"hour_glass\", \"outside_door\", \"toast\", \"puddle\"]
 	# Custom satisfaction and wrath rates - gets angry faster
 	pet.satisfaction_decay_rate = 0.08
 	pet.wrath_increase_rate = 0.15
