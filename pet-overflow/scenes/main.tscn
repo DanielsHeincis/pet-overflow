@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://chrflst7lkw0"]
+[gd_scene load_steps=3 format=3 uid="uid://chrflst7lkw0"]
+
+[ext_resource type="Texture2D" uid="uid://btongt2en7l0p" path="res://icon.svg" id="1_14q1n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pbjn"]
 
 [node name="Main" type="Node2D"]
 
@@ -7,6 +11,13 @@
 [node name="Player" type="CharacterBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_8pbjn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.136719, 0.136719)
+texture = ExtResource("1_14q1n")
+
+[node name="PetSocket" type="Node2D" parent="Player"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
