@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://chrflst7lkw0"]
+
+[node name="Main" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="GlobalLight" type="DirectionalLight2D" parent="."]
