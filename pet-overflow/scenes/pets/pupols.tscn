@@ -1,3 +1,68 @@
-[gd_scene format=3 uid="uid://dqftxq0tofac3"]
+[gd_scene load_steps=4 format=3 uid="uid://dqftxq0tofac3"]
 
-[node name="Pupols" type="Node2D"]
+[ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_uflgu"]
+
+[sub_resource type="GDScript" id="GDScript_pupols"]
+script/source = "extends Node
+
+func _ready():
+	# Configure pet properties
+	var pet = get_parent()
+	pet.pet_name = \"Pupols\"
+	pet.draggable = true
+	pet.hates_being_moved = true
+	pet.moves_by_itself = false
+	# Pupols loves playing cards, hates everything else (especially water/bath)
+	pet.preferred_objects = [\"Toy\"] # Using Toy for card deck until we have a specific card deck object
+	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\"] # Bath (water) is particularly hated
+	# Custom satisfaction and wrath rates
+	pet.satisfaction_decay_rate = 0.12
+	pet.wrath_increase_rate = 0.08
+	# Make sprite a nice blue color
+	if pet.has_node(\"Sprite/ColorRect\"):
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.4, 0.8)"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
+radius = 50.0
+
+[node name="Pupols" type="Area2D"]
+script = ExtResource("1_uflgu")
+
+[node name="PupolsSetup" type="Node" parent="."]
+script = SubResource("GDScript_pupols")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -65.0
+offset_right = 32.0
+offset_bottom = -39.0
+text = "Pupols"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usvai")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Sprite"]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+color = Color(0.2, 0.4, 0.8, 1)
+
+[node name="SatisfactionBar" type="ProgressBar" parent="."]
+modulate = Color(0.14902, 0.686275, 0.85098, 1)
+offset_left = -40.0
+offset_top = -45.0
+offset_right = 40.0
+offset_bottom = -35.0
+show_percentage = false
+
+[node name="WrathBar" type="ProgressBar" parent="."]
+modulate = Color(0.866667, 0.12549, 0.12549, 1)
+offset_left = -40.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -22.0
+show_percentage = false

@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "Godot: Launch Project",
+            "type": "lldb",
+            "request": "launch",
+            "program": "/home/cny/Downloads/godot/Godot_v4.4.1-stable_linux.x86_64",
+            "args": [ "--editor", "--path", "${workspaceFolder}/pet-overflow" ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "build"
+          }
+    ]
+}

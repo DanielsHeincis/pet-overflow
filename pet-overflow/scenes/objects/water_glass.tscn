@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5q701y0m25x2"]
+
+[ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_water"]
+
+[sub_resource type="GDScript" id="GDScript_water"]
+script/source = "extends Node
+
+func _ready():
+	# Configure object properties
+	var obj = get_parent()
+	obj.object_name = \"WaterGlass\"
+	obj.is_zone = false  # This is a movable object
+	obj.draggable = true  # Can be picked up and moved
+"
+
+[node name="WaterGlass" type="Node2D"]
+script = ExtResource("1_water")
+
+[node name="WaterGlassSetup" type="Node" parent="."]
+script = SubResource("GDScript_water")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -34.0
+text = "Water Glass"
+horizontal_alignment = 1
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Glass" type="ColorRect" parent="Sprite"]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 40.0
+color = Color(0.9, 0.9, 0.95, 0.5)
+
+[node name="Water" type="ColorRect" parent="Sprite"]
+offset_left = -15.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = 35.0
+color = Color(0.2, 0.6, 0.9, 0.7)

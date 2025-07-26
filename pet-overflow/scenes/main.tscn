@@ -1,14 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://chrflst7lkw0"]
+[gd_scene load_steps=5 format=3 uid="uid://chrflst7lkw0"]
 
 [ext_resource type="Texture2D" uid="uid://btongt2en7l0p" path="res://icon.svg" id="1_14q1n"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_llvq5"]
+[ext_resource type="PackedScene" uid="uid://bfyexxpv84db0" path="res://scenes/areas/pudio.tscn" id="2_mjed3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pbjn"]
+size = Vector2(80, 80)
 
 [node name="Main" type="Node2D"]
 
+[node name="GameTitle" type="Label" parent="."]
+offset_left = 217.0
+offset_top = 15.0
+offset_right = 584.0
+offset_bottom = 38.0
+text = "To satisfy or not to that is my question"
+horizontal_alignment = 1
+
 [node name="World" type="Node2D" parent="."]
 
+[node name="Pudio" parent="World" instance=ExtResource("2_mjed3")]
+position = Vector2(0, 70)
+
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(403, 324)
+script = ExtResource("1_llvq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_8pbjn")
@@ -17,8 +33,24 @@ shape = SubResource("RectangleShape2D_8pbjn")
 scale = Vector2(0.136719, 0.136719)
 texture = ExtResource("1_14q1n")
 
-[node name="PetSocket" type="Node2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="GlobalLight" type="DirectionalLight2D" parent="."]
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 700.0
+offset_top = 15.0
+offset_right = 785.0
+offset_bottom = 41.0
+text = "Score: 0"
+
+[node name="Instructions" type="Label" parent="HUD"]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 217.0
+offset_bottom = 66.0
+text = "WASD/Arrows: Move camera\nClick & drag pets to objects\nSpace/Click: Drop pet"
+
+[node name="GameSetup" type="Node" parent="."]
+script = SubResource("GDScript", "extends Node\n\nfunc _ready():\n\t# Register pet-object preferences\n\tvar object_registry = {\n\t\t\"Ball\": preload(\"res://scenes/objects/ball.tscn\"),\n\t\t\"Bath\": preload(\"res://scenes/objects/bath.tscn\"),\n\t\t\"Blanket\": preload(\"res://scenes/objects/blanket.tscn\"),\n\t\t\"FoodBowl\": preload(\"res://scenes/objects/food_bowl.tscn\"),\n\t\t\"Toy\": preload(\"res://scenes/objects/toy.tscn\"),\n\t}\n\t\n\t# Set the room variable in the room script\n\tif has_node(\"World/Pudio\"):\n\t\tvar room = get_node(\"World/Pudio\")\n\t\troom.object_scenes = object_registry\n\t\n\t# Spawn initial objects\n\tspawn_initial_objects()\n\nfunc spawn_initial_objects():\n\t# Get the room node\n\tvar room = get_node(\"World/Pudio\")\n\t\n\t# Spawn one of each object type for testing\n\tvar object_types = [\"Ball\", \"Bath\", \"Toy\", \"FoodBowl\", \"Blanket\"]\n\t\n\t# Space them out across the room\n\tfor i in range(len(object_types)):\n\t\tvar object_scene = room.object_scenes[object_types[i]]\n\t\tvar obj = object_scene.instantiate()\n\t\t\n\t\t# Position evenly across room\n\t\tobj.position = Vector2(300 + i * 300, 300)\n\t\t\n\t\t# Add to room\n\t\troom.add_child(obj)\n\t\troom.active_objects.append(obj)\n\t\n\t# Spawn first pet after short delay\n\tawait get_tree().create_timer(2.0).timeout\n\troom.spawn_random_pet()\n")

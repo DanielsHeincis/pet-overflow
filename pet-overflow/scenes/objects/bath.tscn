@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://docf54jc78n3f"]
+
+[ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_bath"]
+
+[sub_resource type="GDScript" id="GDScript_bath"]
+script/source = "extends Node
+
+func _ready():
+	# Configure object properties
+	var obj = get_parent()
+	obj.object_name = \"Bath\"
+	obj.is_zone = true  # This is a zone, not a movable object
+	obj.draggable = false  # Cannot be picked up and moved
+"
+
+[node name="Bath" type="Node2D"]
+script = ExtResource("1_bath")
+
+[node name="BathSetup" type="Node" parent="."]
+script = SubResource("GDScript_bath")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -34.0
+text = "Bath"
+horizontal_alignment = 1
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Sprite"]
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+color = Color(0.2, 0.6, 0.9, 1)

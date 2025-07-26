@@ -1,3 +1,165 @@
-[gd_scene format=3 uid="uid://b6qaoctk7ysj2"]
+[gd_scene load_steps=4 format=3 uid="uid://dalkd5hoflb7v"]
 
-[node name="Toaster" type="Node2D"]
+[ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_e5r1s"]
+
+[sub_resource type="GDScript" id="GDScript_toaster"]
+script/source = "extends Node
+
+func _ready():
+	# Configure pet properties
+	var pet = get_parent()
+	pet.pet_name = \"Toaster\"
+	pet.draggable = true
+	pet.moves_by_itself = false
+	pet.hates_being_moved = false
+	# Toaster loves toast and walks
+	pet.preferred_objects = [\"FoodBowl\", \"Toy\"] # Using FoodBowl for toast
+	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\"]
+	# Highest spawn rate as per README
+	# To be implemented in spawn manager
+	# Custom satisfaction and wrath rates
+	pet.satisfaction_decay_rate = 0.07  # Gets unsatisfied slowly
+	pet.wrath_increase_rate = 0.12  # But gets angry faster
+	# Make sprite a nice red color
+	if pet.has_node(\"Sprite/ColorRect\"):
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.8, 0.2, 0.2)"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
+radius = 50.0
+
+[node name="Toaster" type="Area2D"]
+script = ExtResource("1_e5r1s")
+
+[node name="ToasterSetup" type="Node" parent="."]
+script = SubResource("GDScript_toaster")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -65.0
+offset_right = 32.0
+offset_bottom = -39.0
+text = "Toaster"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usvai")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Body" type="ColorRect" parent="Sprite"]
+offset_left = -40.0
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.8, 0.2, 0.2, 1)
+
+[node name="TopSlot" type="ColorRect" parent="Sprite"]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = -10.0
+offset_bottom = -20.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="BottomSlot" type="ColorRect" parent="Sprite"]
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = -20.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Lever" type="ColorRect" parent="Sprite"]
+offset_left = -45.0
+offset_top = -10.0
+offset_right = -40.0
+offset_bottom = 20.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="LeverKnob" type="ColorRect" parent="Sprite"]
+offset_left = -50.0
+offset_top = 20.0
+offset_right = -35.0
+offset_bottom = 25.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="ControlPanel" type="ColorRect" parent="Sprite"]
+offset_left = -30.0
+offset_top = 15.0
+offset_right = 30.0
+offset_bottom = 35.0
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="Dial1" type="ColorRect" parent="Sprite"]
+offset_left = -25.0
+offset_top = 20.0
+offset_right = -15.0
+offset_bottom = 30.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Dial2" type="ColorRect" parent="Sprite"]
+offset_left = -5.0
+offset_top = 20.0
+offset_right = 5.0
+offset_bottom = 30.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Dial3" type="ColorRect" parent="Sprite"]
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 25.0
+offset_bottom = 30.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="EyeLeft" type="ColorRect" parent="Sprite"]
+offset_left = -25.0
+offset_top = -10.0
+offset_right = -15.0
+offset_bottom = 0.0
+color = Color(1, 1, 1, 1)
+
+[node name="PupilLeft" type="ColorRect" parent="Sprite"]
+offset_left = -22.0
+offset_top = -7.0
+offset_right = -18.0
+offset_bottom = -3.0
+color = Color(0, 0, 0, 1)
+
+[node name="EyeRight" type="ColorRect" parent="Sprite"]
+offset_left = 15.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 0.0
+color = Color(1, 1, 1, 1)
+
+[node name="PupilRight" type="ColorRect" parent="Sprite"]
+offset_left = 18.0
+offset_top = -7.0
+offset_right = 22.0
+offset_bottom = -3.0
+color = Color(0, 0, 0, 1)
+
+[node name="Mouth" type="Line2D" parent="Sprite"]
+position = Vector2(0, 5)
+points = PackedVector2Array(-10, 0, 0, 5, 10, 0)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Cord" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(40, 30, 50, 40, 60, 35, 65, 45)
+width = 3.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="SatisfactionBar" type="ProgressBar" parent="."]
+modulate = Color(0.14902, 0.686275, 0.85098, 1)
+offset_left = -40.0
+offset_top = -45.0
+offset_right = 40.0
+offset_bottom = -35.0
+show_percentage = false
+
+[node name="WrathBar" type="ProgressBar" parent="."]
+modulate = Color(0.866667, 0.12549, 0.12549, 1)
+offset_left = -40.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -22.0
+show_percentage = false

@@ -1,3 +1,133 @@
-[gd_scene format=3 uid="uid://baq03t24bueiv"]
+[gd_scene load_steps=4 format=3 uid="uid://baq03t24bueiv"]
 
-[node name="Time" type="Node2D"]
+[ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_k74vf"]
+
+[sub_resource type="GDScript" id="GDScript_time"]
+script/source = "extends Node
+
+func _ready():
+	# Configure pet properties
+	var pet = get_parent()
+	pet.pet_name = \"Time\"
+	pet.draggable = true
+	pet.moves_by_itself = true
+	pet.hates_being_moved = true
+	# Time loves food and toys, hates blankets
+	pet.preferred_objects = [\"FoodBowl\", \"Toy\"]
+	pet.forbidden_objects = [\"Blanket\"]
+	# Custom satisfaction and wrath rates
+	pet.satisfaction_decay_rate = 0.15  # Gets unsatisfied quickly
+	pet.wrath_increase_rate = 0.05
+	# Make sprite a nice green color
+	if pet.has_node(\"Sprite/ColorRect\"):
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.7, 0.3)"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
+radius = 50.0
+
+[node name="Time" type="Area2D"]
+script = ExtResource("1_k74vf")
+
+[node name="TimeSetup" type="Node" parent="."]
+script = SubResource("GDScript_time")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -65.0
+offset_right = 32.0
+offset_bottom = -39.0
+text = "Time"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usvai")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="ClockFace" type="CircleShape2D" parent="Sprite"]
+radius = 45.0
+
+[node name="ClockBody" type="Polygon2D" parent="Sprite"]
+color = Color(0.6, 0.6, 0.6, 1)
+polygon = PackedVector2Array(0, -45, 31.8, -31.8, 45, 0, 31.8, 31.8, 0, 45, -31.8, 31.8, -45, 0, -31.8, -31.8)
+
+[node name="ClockOutline" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(0, -45, 31.8, -31.8, 45, 0, 31.8, 31.8, 0, 45, -31.8, 31.8, -45, 0, -31.8, -31.8, 0, -45)
+width = 2.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="ClockCenter" type="Polygon2D" parent="Sprite"]
+color = Color(0.2, 0.2, 0.2, 1)
+polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[node name="HourHand" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(0, 0, 0, -25)
+width = 4.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="MinuteHand" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(0, 0, 30, 0)
+width = 3.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Mark12" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(0, -45, 0, -35)
+width = 2.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Mark3" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(45, 0, 35, 0)
+width = 2.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Mark6" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(0, 45, 0, 35)
+width = 2.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Mark9" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(-45, 0, -35, 0)
+width = 2.0
+default_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="EyeLeft" type="Polygon2D" parent="Sprite"]
+position = Vector2(-15, -15)
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
+
+[node name="PupilLeft" type="Polygon2D" parent="Sprite"]
+position = Vector2(-15, -15)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="EyeRight" type="Polygon2D" parent="Sprite"]
+position = Vector2(15, -15)
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
+
+[node name="PupilRight" type="Polygon2D" parent="Sprite"]
+position = Vector2(15, -15)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="Mouth" type="Line2D" parent="Sprite"]
+position = Vector2(0, 15)
+points = PackedVector2Array(-15, 0, -5, 5, 5, 5, 15, 0)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="SatisfactionBar" type="ProgressBar" parent="."]
+modulate = Color(0.14902, 0.686275, 0.85098, 1)
+offset_left = -40.0
+offset_top = -45.0
+offset_right = 40.0
+offset_bottom = -35.0
+show_percentage = false
+
+[node name="WrathBar" type="ProgressBar" parent="."]
+modulate = Color(0.866667, 0.12549, 0.12549, 1)
+offset_left = -40.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -22.0
+show_percentage = false

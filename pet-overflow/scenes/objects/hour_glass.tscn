@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://c112ov463r36l"]
+
+[ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_hourglass"]
+
+[sub_resource type="GDScript" id="GDScript_hourglass"]
+script/source = "extends Node
+
+func _ready():
+	# Configure object properties
+	var obj = get_parent()
+	obj.object_name = \"HourGlass\"
+	obj.is_zone = false  # This is a movable object
+	obj.draggable = true  # Can be picked up and moved
+"
+
+[node name="HourGlass" type="Node2D"]
+script = ExtResource("1_hourglass")
+
+[node name="HourGlassSetup" type="Node" parent="."]
+script = SubResource("GDScript_hourglass")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -34.0
+text = "Hour Glass"
+horizontal_alignment = 1
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Top" type="Polygon2D" parent="Sprite"]
+color = Color(0.95, 0.85, 0.6, 1)
+polygon = PackedVector2Array(-20, -40, 20, -40, 10, -10, -10, -10)
+
+[node name="Bottom" type="Polygon2D" parent="Sprite"]
+color = Color(0.95, 0.85, 0.6, 1)
+polygon = PackedVector2Array(-10, 10, 10, 10, 20, 40, -20, 40)
+
+[node name="Middle" type="Polygon2D" parent="Sprite"]
+color = Color(0.7, 0.7, 0.8, 0.5)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Frame" type="Line2D" parent="Sprite"]
+points = PackedVector2Array(-20, -40, 20, -40, 10, -10, 10, 10, 20, 40, -20, 40, -10, 10, -10, -10, -20, -40)
+width = 2.0
+default_color = Color(0.3, 0.3, 0.3, 1)

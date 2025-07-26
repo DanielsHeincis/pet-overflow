@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://bto85vqj1h8qx"]
+
+[ext_resource type="Script" uid="uid://cl3auit7004jb" path="res://scripts/game_over.gd" id="1_uhw0v"]
+
+[node name="GameOver" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_uhw0v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.129412, 0.129412, 0.188235, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+offset_top = 31.0
+offset_right = 400.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 24
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="VBoxContainer"]
+offset_top = 61.0
+offset_right = 400.0
+offset_bottom = 87.0
+text = "A pet's meter overflowed!"
+horizontal_alignment = 1
+
+[node name="PetNameLabel" type="Label" parent="VBoxContainer"]
+offset_top = 91.0
+offset_right = 400.0
+offset_bottom = 117.0
+text = "Pet Name"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer"]
+offset_top = 121.0
+offset_right = 400.0
+offset_bottom = 147.0
+text = "Final Score: 0"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
+offset_top = 151.0
+offset_right = 400.0
+offset_bottom = 182.0
+alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+offset_left = 86.0
+offset_right = 199.0
+offset_bottom = 31.0
+text = "Play Again"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+offset_left = 203.0
+offset_right = 314.0
+offset_bottom = 31.0
+text = "Quit Game"

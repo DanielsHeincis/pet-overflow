@@ -1,3 +1,70 @@
-[gd_scene format=3 uid="uid://pvnyjnkihhc7"]
+[gd_scene load_steps=4 format=3 uid="uid://dmde71jepxi7a"]
 
-[node name="Julija" type="Node2D"]
+[ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_anhdg"]
+
+[sub_resource type="GDScript" id="GDScript_julija"]
+script/source = "extends Node
+
+func _ready():
+	# Configure pet properties
+	var pet = get_parent()
+	pet.pet_name = \"Julija\"
+	pet.draggable = true
+	pet.hates_being_moved = false
+	pet.moves_by_itself = false
+	# Julija loves jam, wooden spoons, gameboys
+	pet.preferred_objects = [\"FoodBowl\", \"Toy\"] # Using FoodBowl for jam and Toy as a stand-in for gameboy
+	pet.forbidden_objects = [\"Bath\"] # Doesn't particularly hate anything
+	# Custom satisfaction and wrath rates - gets angry faster
+	pet.satisfaction_decay_rate = 0.08
+	pet.wrath_increase_rate = 0.15
+	# Lowest spawn rate as per README
+	# To be implemented in the spawn manager
+	# Make sprite a nice purple color
+	if pet.has_node(\"Sprite/ColorRect\"):
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.6, 0.2, 0.8)"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
+radius = 50.0
+
+[node name="Julija" type="Area2D"]
+script = ExtResource("1_anhdg")
+
+[node name="JulijaSetup" type="Node" parent="."]
+script = SubResource("GDScript_julija")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -65.0
+offset_right = 32.0
+offset_bottom = -39.0
+text = "Julija"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usvai")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Sprite"]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+color = Color(0.6, 0.2, 0.8, 1)
+
+[node name="SatisfactionBar" type="ProgressBar" parent="."]
+modulate = Color(0.14902, 0.686275, 0.85098, 1)
+offset_left = -40.0
+offset_top = -45.0
+offset_right = 40.0
+offset_bottom = -35.0
+show_percentage = false
+
+[node name="WrathBar" type="ProgressBar" parent="."]
+modulate = Color(0.866667, 0.12549, 0.12549, 1)
+offset_left = -40.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -22.0
+show_percentage = false
