@@ -14,7 +14,7 @@ func _ready():
 	var pet = get_parent()
 	pet.pet_name = \"Wet Owl\"
 	pet.draggable = true
-	pet.moves_by_itself = false
+	pet.moves_by_itself = true  # Enable autonomous movement
 	pet.hates_being_moved = false
 	pet.preferred_objects = [\"water_glass\"]
 	pet.forbidden_objects = [\"bath\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\"]

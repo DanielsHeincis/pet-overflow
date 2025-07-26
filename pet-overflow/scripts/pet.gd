@@ -74,19 +74,61 @@ func _process(delta):
 
 # Setup visual components
 func setup_visuals():
-	# Create sprite if not present
-	if not has_node("AnimatedSprite2D"):
-		# If no animated sprite exists, create a basic visualization
-		var sprite_node = Node2D.new()
-		sprite_node.name = "Sprite"
-		add_child(sprite_node)
+	# Check if we already have a proper sprite
+	if has_node("AnimatedSprite2D"):
+		# We already have a proper sprite, no need to create a placeholder
+		return
 		
-		# Add simple color rect as visual
-		var rect = ColorRect.new()
-		rect.size = Vector2(100, 100)
-		rect.position = Vector2(-50, -50)
-		rect.color = Color(0.5, 0.5, 0.9) # Default blue color
-		sprite_node.add_child(rect)
+	# Create a more distinctive pet placeholder instead of a blue rectangle
+	var sprite_node = Node2D.new()
+	sprite_node.name = "Sprite"
+	add_child(sprite_node)
+	
+	# Create a more pet-like shape with multiple parts
+	# Body
+	var body = ColorRect.new()
+	body.size = Vector2(80, 60)
+	body.position = Vector2(-40, -40)
+	
+	# Randomize color to distinguish different pets
+	var r = randf_range(0.4, 0.9)
+	var g = randf_range(0.4, 0.9)
+	var b = randf_range(0.4, 0.9)
+	body.color = Color(r, g, b)
+	sprite_node.add_child(body)
+	
+	# Head
+	var head = ColorRect.new()
+	head.size = Vector2(40, 40)
+	head.position = Vector2(-20, -60)
+	head.color = body.color.lightened(0.2) # Slightly lighter than body
+	sprite_node.add_child(head)
+	
+	# Eyes
+	var left_eye = ColorRect.new()
+	left_eye.size = Vector2(8, 8)
+	left_eye.position = Vector2(-15, -55)
+	left_eye.color = Color(0, 0, 0) # Black eyes
+	sprite_node.add_child(left_eye)
+	
+	var right_eye = ColorRect.new()
+	right_eye.size = Vector2(8, 8)
+	right_eye.position = Vector2(7, -55)
+	right_eye.color = Color(0, 0, 0) # Black eyes
+	sprite_node.add_child(right_eye)
+	
+	# Add pet name label
+	var name_label = Label.new()
+	name_label.text = pet_name
+	name_label.position = Vector2(-40, -90)
+	name_label.size = Vector2(80, 20)
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var font_settings = LabelSettings.new()
+	font_settings.font_size = 12
+	font_settings.outline_size = 1
+	font_settings.outline_color = Color(0, 0, 0)
+	name_label.label_settings = font_settings
+	sprite_node.add_child(name_label)
 	
 	# Create collision shape if not present
 	if not has_node("CollisionShape2D"):
@@ -167,7 +209,7 @@ func update_meters():
 	if has_node("WrathBar"):
 		get_node("WrathBar").value = wrath_level
 
-# Handle being picked up
+# Handle being picked up or dropped
 func _on_area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -183,6 +225,10 @@ func _on_area_input_event(_viewport, event, _shape_idx):
 						modulate = Color(1, 0, 0)
 						var tween = create_tween()
 						tween.tween_property(self, "modulate", Color(1, 1, 1), 0.5)
+			else: # Button released
+				# Drop the pet if we're holding it
+				if Globals.is_holding_pet() and Globals.held_pet == self:
+					Globals.drop_pet()
 
 # Mouse hover feedback
 func _on_mouse_entered():

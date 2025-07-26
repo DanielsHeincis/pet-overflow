@@ -22,15 +22,21 @@ func _ready():
 	setup_visuals()
 	setup_collision()
 
-func _process(_delta):
-	# Follow mouse if being held
+func _process(delta):
+	# Follow mouse if being held - with interpolation for smoother movement
 	if is_being_held and draggable:
 		# Follow mouse position but keep within screen bounds
 		var mouse_pos = get_global_mouse_position()
 		# Clamp to room boundaries with some margin
 		mouse_pos.x = clamp(mouse_pos.x, 50, Globals.room_width - 50)
 		mouse_pos.y = clamp(mouse_pos.y, 50, Globals.room_height - 50)
-		global_position = mouse_pos
+		
+		# Use interpolation for smoother movement (lerp)
+		# Adjust the interpolation weight based on delta time
+		# Higher values (closer to 1) make movement more responsive but potentially less smooth
+		# Lower values (closer to 0) make movement smoother but potentially more laggy
+		var interpolation_weight = min(1.0, 25.0 * delta) # Adjust this value as needed
+		global_position = global_position.lerp(mouse_pos, interpolation_weight)
 
 # Setup visual components
 func setup_visuals():
@@ -128,10 +134,22 @@ func release():
 	
 	# Make the object drop to the ground with a falling animation
 	var ground_y = Globals.room_height - 50  # Ground level with some offset for the object's height
-	var drop_tween = create_tween()
-	drop_tween.tween_property(self, "global_position:y", ground_y, 0.3).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
-	# Also ensure the object stays within the room bounds
+	# Create a more realistic gravity effect with better tween settings
+	var drop_tween = create_tween()
+	# Start with current position
+	var start_y = global_position.y
+	# Calculate drop duration based on distance (faster fall from higher positions)
+	var drop_distance = ground_y - start_y
+	var drop_duration = max(0.1, min(0.5, drop_distance / 500))
+	
+	# Use CUBIC ease for more natural gravity acceleration
+	drop_tween.tween_property(self, "global_position:y", ground_y, drop_duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	# Add a small bounce at the end
+	drop_tween.tween_property(self, "global_position:y", ground_y - 10, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	drop_tween.tween_property(self, "global_position:y", ground_y, 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	
+	# Ensure the object stays within the room bounds
 	var min_x = 50  # Left boundary with offset
 	var max_x = Globals.room_width - 50  # Right boundary with offset
 	global_position.x = clamp(global_position.x, min_x, max_x)

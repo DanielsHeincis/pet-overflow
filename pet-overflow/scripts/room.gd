@@ -103,7 +103,16 @@ func spawn_random_pet():
 	# Get list of pet types that are already in the room
 	var existing_pet_types = []
 	for pet in active_pets:
-		existing_pet_types.append(pet.pet_name.to_lower())
+		# Debug print to check what's in the active pets list
+		print("Active pet: ", pet.name, " - Pet type: ", pet.pet_name)
+		
+		# Use a more reliable method to track pet types
+		# Store the actual scene name or a unique identifier
+		var pet_type = pet.get_meta("pet_type") if pet.has_meta("pet_type") else pet.name.split("@")[0].to_lower()
+		existing_pet_types.append(pet_type)
+	
+	# Print for debugging
+	print("Existing pet types: ", existing_pet_types)
 	
 	# Filter available pets to exclude ones that already exist
 	var available_pets = []
@@ -111,8 +120,12 @@ func spawn_random_pet():
 		if not pet_type in existing_pet_types:
 			available_pets.append(pet_type)
 	
+	# Print for debugging
+	print("Available pet types for spawning: ", available_pets)
+	
 	# If no available pets (all types already spawned), return
 	if available_pets.size() == 0:
+		print("No unique pets available to spawn")
 		return
 	
 	# Choose a random pet based on spawn rates
@@ -130,8 +143,16 @@ func spawn_random_pet():
 			chosen_pet = pet
 			break
 	
+	print("Spawning pet: ", chosen_pet)
+	
 	# Create the pet instance
 	var pet_instance = pet_scenes[chosen_pet].instantiate()
+	
+	# Set a meta to track the pet type
+	pet_instance.set_meta("pet_type", chosen_pet)
+	
+	# Make sure the pet name is properly set
+	pet_instance.pet_name = chosen_pet.capitalize()
 	
 	# Place at a random spawn point
 	if pet_spawn_points.size() > 0:
