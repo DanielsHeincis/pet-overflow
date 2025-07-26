@@ -14,7 +14,7 @@ func _ready():
 	pet.hates_being_moved = true
 	# Time only loves hour glass, hates everything else
 	pet.preferred_objects = [\"hour_glass\"]
-	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Toy\", \"water_glass\", \"card_deck\", \"gameboy\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"puddle\"]
+	pet.forbidden_objects = [\"bath\", \"water_glass\", \"card_deck\", \"gameboy\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"puddle\"]
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.15  # Gets unsatisfied quickly
 	pet.wrath_increase_rate = 0.05

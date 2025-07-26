@@ -3,6 +3,7 @@ extends Node
 # References
 # No physical player, only cursor interaction as per v2 additions
 var held_pet: Node2D = null  # Track if player is holding one
+var held_object: Node2D = null  # Track if player is holding an object
 var current_room: Node2D = null  # Track which room is loaded
 var pet_registry := {}  # Track all pets and their states
 var object_registry := {}  # Track all objects and their states
@@ -65,6 +66,19 @@ func register_object(object):
 func remove_object(object):
 	if object_registry.has(object.name):
 		object_registry.erase(object.name)
+		
+func hold_object(object):
+	if held_object or held_pet:
+		return  # Already holding something
+	held_object = object
+
+
+func release_object():
+	if held_object:
+		held_object = null
+		
+func is_holding_object() -> bool:
+	return held_object != null
 
 # Game state management
 func add_score(points):
@@ -80,7 +94,14 @@ func end_game(pet):
 	game_over_label.position = Vector2(400, 250)
 	game_over_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	game_over_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	game_over_label.add_theme_font_size_override("font_size", 48)
+	
+	# Set white text with black outline
+	var font_settings = LabelSettings.new()
+	font_settings.font_size = 48
+	font_settings.font_color = Color(1, 1, 1) # White
+	font_settings.outline_size = 4
+	font_settings.outline_color = Color(0, 0, 0) # Black
+	game_over_label.label_settings = font_settings
 	
 	var reason = ""
 	if pet.satisfaction_level >= 100:
@@ -93,13 +114,28 @@ func end_game(pet):
 	reason_label.position = Vector2(400, 320)
 	reason_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	reason_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	reason_label.add_theme_font_size_override("font_size", 24)
+	
+	# Also set white text with black outline for reason
+	var reason_font_settings = LabelSettings.new()
+	reason_font_settings.font_size = 24
+	reason_font_settings.font_color = Color(1, 1, 1) # White
+	reason_font_settings.outline_size = 2
+	reason_font_settings.outline_color = Color(0, 0, 0) # Black
+	reason_label.label_settings = reason_font_settings
 	
 	var score_label = Label.new()
 	score_label.text = "Final Score: " + str(current_score)
 	score_label.position = Vector2(400, 380)
 	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	score_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	
+	# Set white text with black outline for score
+	var score_font_settings = LabelSettings.new()
+	score_font_settings.font_size = 20
+	score_font_settings.font_color = Color(1, 1, 1) # White
+	score_font_settings.outline_size = 2
+	score_font_settings.outline_color = Color(0, 0, 0) # Black
+	score_label.label_settings = score_font_settings
 	
 	var ui_layer = CanvasLayer.new()
 	ui_layer.layer = 100 # Make sure it's on top

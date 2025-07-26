@@ -19,11 +19,11 @@ var active_objects = []
 
 # Pet references
 var pet_scenes = {
-	"Pupols": preload("res://scenes/pets/pupols.tscn"),
-	"Julija": preload("res://scenes/pets/julija.tscn"),
-	"Time": preload("res://scenes/pets/time.tscn"),
-	"Toaster": preload("res://scenes/pets/toaster.tscn"),
-	"WetOwl": preload("res://scenes/pets/wet_owl.tscn")
+	"pupols": preload("res://scenes/pets/pupols.tscn"),
+	"julija": preload("res://scenes/pets/julija.tscn"),
+	"time": preload("res://scenes/pets/time.tscn"),
+	"toaster": preload("res://scenes/pets/toaster.tscn"),
+	"wet_owl": preload("res://scenes/pets/wet_owl.tscn")
 }
 
 # Object scenes to spawn
@@ -31,16 +31,16 @@ var object_scenes = {}
 
 # Object spawn rates (higher number = more likely to spawn)
 var object_spawn_rates = {
-	"Bath": 0.5,  # Less common since it's a special zone
-	"WaterGlass": 0.5,
-	"CardDeck": 0.5,
-	"Gameboy": 0.5,
-	"HourGlass": 0.5,
-	"JamJar": 0.5,
-	"OutsideDoor": 0.5,
-	"Puddle": 0.5,
-	"Toast": 0.5,
-	"WoodenSpoon": 0.5
+	"bath": 0.5,  # Less common since it's a special zone
+	"water_glass": 0.5,
+	"card_deck": 0.5,
+	"gameboy": 0.5,
+	"hour_glass": 0.5,
+	"jam_jar": 0.5,
+	"outside_door": 0.5,
+	"puddle": 0.5,
+	"toast": 0.5,
+	"wooden_spoon": 0.5
 }
 
 # Spawn points
@@ -53,11 +53,11 @@ var object_spawn_timer: Timer
 
 # Spawn rates for pets (higher number = more likely to spawn)
 var pet_spawn_rates = {
-	"Pupols": 1.0,
-	"Julija": 0.7,
-	"Time": 0.5,
-	"Toaster": 0.3,
-	"WetOwl": 0.2  # Rare special pet
+	"pupols": 1.0,
+	"julija": 0.7,
+	"time": 0.5,
+	"toaster": 0.3,
+	"wet_owl": 0.2  # Rare special pet
 }
 
 func _ready():
@@ -100,9 +100,23 @@ func spawn_random_pet():
 	if active_pets.size() >= max_pets:
 		return
 	
+	# Get list of pet types that are already in the room
+	var existing_pet_types = []
+	for pet in active_pets:
+		existing_pet_types.append(pet.pet_name.to_lower())
+	
+	# Filter available pets to exclude ones that already exist
+	var available_pets = []
+	for pet_type in pet_spawn_rates.keys():
+		if not pet_type in existing_pet_types:
+			available_pets.append(pet_type)
+	
+	# If no available pets (all types already spawned), return
+	if available_pets.size() == 0:
+		return
+	
 	# Choose a random pet based on spawn rates
 	var total_rate = 0
-	var available_pets = pet_spawn_rates.keys()
 	for pet in available_pets:
 		total_rate += pet_spawn_rates[pet]
 	
@@ -139,16 +153,16 @@ func spawn_random_pet():
 
 func load_object_scenes():
 	# Load scenes manually to avoid preload errors
-	object_scenes["Bath"] = load("res://scenes/objects/bath.tscn")
-	object_scenes["WaterGlass"] = load("res://scenes/objects/water_glass.tscn")
-	object_scenes["CardDeck"] = load("res://scenes/objects/card_deck.tscn")
-	object_scenes["Gameboy"] = load("res://scenes/objects/gameboy.tscn")
-	object_scenes["HourGlass"] = load("res://scenes/objects/hour_glass.tscn")
-	object_scenes["JamJar"] = load("res://scenes/objects/jam_jar.tscn")
-	object_scenes["OutsideDoor"] = load("res://scenes/objects/outside_door.tscn")
-	object_scenes["Puddle"] = load("res://scenes/objects/puddle.tscn")
-	object_scenes["Toast"] = load("res://scenes/objects/toast.tscn")
-	object_scenes["WoodenSpoon"] = load("res://scenes/objects/wooden_spoon.tscn")
+	object_scenes["bath"] = load("res://scenes/objects/bath.tscn")
+	object_scenes["water_glass"] = load("res://scenes/objects/water_glass.tscn")
+	object_scenes["card_deck"] = load("res://scenes/objects/card_deck.tscn")
+	object_scenes["gameboy"] = load("res://scenes/objects/gameboy.tscn")
+	object_scenes["hour_glass"] = load("res://scenes/objects/hour_glass.tscn")
+	object_scenes["jam_jar"] = load("res://scenes/objects/jam_jar.tscn")
+	object_scenes["outside_door"] = load("res://scenes/objects/outside_door.tscn")
+	object_scenes["puddle"] = load("res://scenes/objects/puddle.tscn")
+	object_scenes["toast"] = load("res://scenes/objects/toast.tscn")
+	object_scenes["wooden_spoon"] = load("res://scenes/objects/wooden_spoon.tscn")
 
 
 
@@ -189,7 +203,6 @@ func spawn_random_object():
 		Globals.register_object(object_instance)
 	
 func _process(_delta):
-	# Check game over conditions
 	for pet in active_pets:
 		if pet.satisfaction_level >= 100 or pet.wrath_level >= 100:
 			game_over(pet)
@@ -201,6 +214,14 @@ func game_over(pet):
 	game_over_label.text = "Game Over!"
 	game_over_label.set_anchors_preset(Control.PRESET_CENTER)
 	
+	# Set white text with black outline
+	var font_settings = LabelSettings.new()
+	font_settings.font_size = 48
+	font_settings.font_color = Color(1, 1, 1) # White
+	font_settings.outline_size = 4
+	font_settings.outline_color = Color(0, 0, 0) # Black
+	game_over_label.label_settings = font_settings
+	
 	var reason = ""
 	if pet.satisfaction_level >= 100:
 		reason = pet.pet_name + " was too satisfied and exploded with joy!"
@@ -211,6 +232,14 @@ func game_over(pet):
 	reason_label.text = reason
 	reason_label.position.y += 50
 	reason_label.set_anchors_preset(Control.PRESET_CENTER)
+	
+	# Also set white text with black outline for reason
+	var reason_font_settings = LabelSettings.new()
+	reason_font_settings.font_size = 24
+	reason_font_settings.font_color = Color(1, 1, 1) # White
+	reason_font_settings.outline_size = 2
+	reason_font_settings.outline_color = Color(0, 0, 0) # Black
+	reason_label.label_settings = reason_font_settings
 	
 	var ui = CanvasLayer.new()
 	add_child(ui)

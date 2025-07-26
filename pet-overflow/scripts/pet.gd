@@ -153,7 +153,14 @@ func setup_meters():
 
 # Update UI meters
 func update_meters():
-	# Access our progress bar nodes directly
+	# Update the progress bar values if they exist
+	if satisfaction_meter:
+		satisfaction_meter.value = satisfaction_level
+		
+	if wrath_meter:
+		wrath_meter.value = wrath_level
+	
+	# For backwards compatibility, also check for direct nodes
 	if has_node("SatisfactionBar"):
 		get_node("SatisfactionBar").value = satisfaction_level
 		
@@ -205,46 +212,34 @@ func interact_with_object(object):
 	is_interacting = true
 	
 	if object.name in preferred_objects:
-		# Play happy animation
 		play_animation("happy")
-		# Increase satisfaction
 		satisfaction_level += 20
-		# Decrease wrath
 		wrath_level = max(0, wrath_level - 10)
 	elif object.name in forbidden_objects:
-		# Play angry animation
 		play_animation("angry")
-		# Increase wrath
 		wrath_level += 15
 	else:
-		# Play neutral animation
 		play_animation("neutral")
-		# Small decrease in wrath
 		wrath_level = max(0, wrath_level - 5)
 	
-	# End interaction after animation
 	await get_tree().create_timer(2.0).timeout
 	is_interacting = false
 
-# Handle autonomous pet movement
 func handleAutonomousMovement(delta):
-	# Manage movement timers
 	if is_moving:
 		move_timer -= delta
 		if move_timer <= 0:
-			# Stop moving and start idling
 			is_moving = false
-			idle_timer = randf_range(1.0, 4.0) # Random idle time between 1-4 seconds
+			idle_timer = randf_range(1.0, 4.0)
 			play_animation("idle")
 		else:
-			# Continue moving in the current direction
-			global_position += move_direction * delta * 50 # Movement speed
+			# Continue moving in the current direction - HORIZONTAL ONLY
+			# Y position stays the same to keep pet on the ground
+			global_position.x += move_direction.x * delta * 50 # Movement speed
 			
 			# Keep pet within room bounds
 			var room_width = Globals.room_width
-			var room_height = Globals.room_height
 			global_position.x = clamp(global_position.x, 50, room_width - 50)
-			global_position.y = clamp(global_position.y, 50, room_height - 50)
 			
 			# Flip sprite based on movement direction
 			if has_node("Sprite") or has_node("AnimatedSprite2D"):
@@ -255,13 +250,14 @@ func handleAutonomousMovement(delta):
 	else:
 		idle_timer -= delta
 		if idle_timer <= 0:
-			# Start moving in a random direction
+			# Start moving in a random direction - HORIZONTAL ONLY
 			is_moving = true
 			move_timer = randf_range(0.5, 2.0) # Random movement time between 0.5-2 seconds
 			
-			# Choose a random direction
-			var angle = randf_range(0, 2 * PI)
-			move_direction = Vector2(cos(angle), sin(angle)).normalized()
+			# Choose a random horizontal direction (left or right)
+			# 50% chance of going left, 50% chance of going right
+			var direction = 1 if randf() > 0.5 else -1
+			move_direction = Vector2(direction, 0).normalized()
 			play_animation("walk")
 
 # Play animation

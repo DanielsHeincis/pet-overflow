@@ -25,7 +25,12 @@ func _ready():
 func _process(_delta):
 	# Follow mouse if being held
 	if is_being_held and draggable:
-		global_position = get_global_mouse_position()
+		# Follow mouse position but keep within screen bounds
+		var mouse_pos = get_global_mouse_position()
+		# Clamp to room boundaries with some margin
+		mouse_pos.x = clamp(mouse_pos.x, 50, Globals.room_width - 50)
+		mouse_pos.y = clamp(mouse_pos.y, 50, Globals.room_height - 50)
+		global_position = mouse_pos
 
 # Setup visual components
 func setup_visuals():
@@ -72,7 +77,7 @@ func setup_collision():
 		
 		add_child(area)
 
-# Handle being picked up
+# Handle being picked up or released
 func _on_area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -81,12 +86,20 @@ func _on_area_input_event(_viewport, event, _shape_idx):
 				if draggable and not is_zone and used_by_pet == null:
 					is_being_held = true
 					z_index = 10  # Bring to front
+					# Register with globals that we're holding this object
+					Globals.hold_object(self)
 				elif is_zone:
 					# Check if there's a pet being held that can be dropped here
 					if Globals.is_holding_pet():
 						var pet = Globals.held_pet
 						# Trigger interaction
 						pet_interact(pet)
+			else: # Mouse button released
+				# Release the object if we're holding it
+				if is_being_held:
+					release()
+					# Tell globals we're no longer holding this object
+					Globals.release_object()
 						
 func _on_mouse_entered():
 	# Visual feedback on hover
@@ -112,6 +125,16 @@ func _on_area_exited(area):
 func release():
 	is_being_held = false
 	z_index = 0
+	
+	# Make the object drop to the ground with a falling animation
+	var ground_y = Globals.room_height - 50  # Ground level with some offset for the object's height
+	var drop_tween = create_tween()
+	drop_tween.tween_property(self, "global_position:y", ground_y, 0.3).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	
+	# Also ensure the object stays within the room bounds
+	var min_x = 50  # Left boundary with offset
+	var max_x = Globals.room_width - 50  # Right boundary with offset
+	global_position.x = clamp(global_position.x, min_x, max_x)
 
 # When a pet interacts with this object
 func pet_interact(pet):

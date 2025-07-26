@@ -67,6 +67,7 @@ Wrath meter:
 - Slow increase.
 - Decrease on satisfaction.
 - Can overflow causing the player to die.
+- Slowly increases by time.
 
 Pets:
 - Pets are drag and dropped onto an object or a zone like a specific room or a part of the room.
@@ -194,12 +195,17 @@ Objects:
         - When dragging a pet to it or dragging it to a pet, it triggers an interaction
         - Nothing happens on collision when not interacting
 
+Pet movement:
+- Some pets move by themselves
+- Some pets can't be moved
+- Some pets hate being moved
+- Some pets move in random directions
+- Pets only walk on ground and can only move horizontal
 
 Interaction nature:
 - After collision, the interaction is triggered
     - If the interaction is successful, the collision is on cooldown for a certain amount of time
     - [ ] Visualize it, add a timer on top of it
-
 
 Game intesity:
 - The more pets, the angrier they get

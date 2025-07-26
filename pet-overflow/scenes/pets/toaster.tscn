@@ -14,7 +14,7 @@ func _ready():
 	pet.hates_being_moved = false
 	# Toaster loves toast and outside door (walks)
 	pet.preferred_objects = [\"toast\", \"outside_door\"]
-	pet.forbidden_objects = [\"Bath\", \"Ball\", \"Blanket\", \"FoodBowl\", \"Toy\", \"water_glass\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"wooden_spoon\", \"puddle\"]
+	pet.forbidden_objects = [\"bath\", \"water_glass\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"wooden_spoon\", \"puddle\"]
 	# Highest spawn rate as per README
 	# To be implemented in spawn manager
 	# Custom satisfaction and wrath rates

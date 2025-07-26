@@ -14,7 +14,7 @@ func _ready():
 	pet.moves_by_itself = false
 	# Pupols loves playing cards, hates everything else (especially water/bath)
 	pet.preferred_objects = [\"card_deck\"] 
-	pet.forbidden_objects = [\"Bath\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"gameboy\"] 
+	pet.forbidden_objects = [\"bath\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"gameboy\"] 
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.12
 	pet.wrath_increase_rate = 0.08
