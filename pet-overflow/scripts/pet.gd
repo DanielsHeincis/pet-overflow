@@ -3,11 +3,18 @@ class_name Pet
 
 # Pet properties
 var pet_name: String = "Unknown Pet"
+var pet_type: String = "Generic"
 var draggable: bool = true  # Some pets may not be movable
 var hates_being_moved: bool = false # Some pets hate being moved
 var moves_by_itself: bool = false # Some pets move on their own
 var preferred_objects = []  # Objects that satisfy this pet
 var forbidden_objects = []  # Objects that make pet angry
+
+# GIF animation properties
+var interaction_gif: String = "ytuh.gif"  # Default interaction GIF
+var game_over_gif: String = "skeleton-burning.gif"  # Default game over GIF
+var gif_duration: float = 3.0  # Default duration in seconds
+var gif_player: AnimatedSprite2D = null  # AnimatedSprite2D for playing GIFs
 
 # Meters
 var satisfaction_level: float = 0  # 0-100
@@ -37,6 +44,8 @@ func _ready():
 	setup_visuals()
 	setup_collision()
 	setup_meters()
+	setup_pet_gifs()  # Set up pet-specific GIFs
+	setup_gif_player()
 	
 	# Connect input events - handled by Area2D instead
 	# No direct input_event connection needed
@@ -145,9 +154,14 @@ func setup_collision():
 		var area = Area2D.new()
 		area.name = "Area2D"
 		
+		# Get the pet's visual size (body is 80x80) and add a small border
+		var pet_width = 80
+		var pet_height = 80
+		var border = 10  # 10 pixel border around the pet
+		
 		var collision = CollisionShape2D.new()
 		var shape = RectangleShape2D.new()
-		shape.size = Vector2(100, 100)
+		shape.size = Vector2(pet_width + border * 2, pet_height + border * 2)  # Add border on all sides
 		collision.shape = shape
 		area.add_child(collision)
 		
@@ -156,6 +170,69 @@ func setup_collision():
 		area.connect("mouse_exited", _on_mouse_exited)
 		
 		add_child(area)
+
+# Setup pet-specific GIFs based on pet type
+func setup_pet_gifs():
+	# Assign different GIFs and durations based on pet type
+	if pet_type == "WetOwl":
+		interaction_gif = "ytuh.gif"
+		game_over_gif = "skeleton-burning.gif"
+		gif_duration = 4.0  # Longer duration
+	elif pet_type == "Pupols":
+		interaction_gif = "catkill.gif"
+		game_over_gif = "skeleton-burning.gif"
+		gif_duration = 2.5  # Medium duration
+	elif pet_type == "Julija":
+		interaction_gif = "ytuh.gif"
+		game_over_gif = "catkill.gif"
+		gif_duration = 3.0  # Default duration
+
+# Setup GIF player for animations
+func setup_gif_player():
+	# Create AnimatedSprite2D for GIF playback
+	if not has_node("GifPlayer"):
+		gif_player = AnimatedSprite2D.new()
+		gif_player.name = "GifPlayer"
+		gif_player.visible = false  # Hidden by default
+		gif_player.position = Vector2(0, -60)  # Position above the pet
+		gif_player.scale = Vector2(1.5, 1.5)  # Scale up for visibility
+		add_child(gif_player)
+
+# Play a GIF animation
+func play_gif(gif_type = "interaction"):
+	if not gif_player:
+		return
+	
+	# Determine which GIF to play
+	var gif_path = "res://assets/"
+	if gif_type == "interaction":
+		gif_path += interaction_gif
+	else:  # game_over
+		gif_path += game_over_gif
+	
+	# Load the GIF as SpriteFrames
+	var frames = load_gif_frames(gif_path)
+	if frames:
+		gif_player.sprite_frames = frames
+		gif_player.visible = true
+		gif_player.play("default")
+		
+		# Hide after duration
+		await get_tree().create_timer(gif_duration).timeout
+		gif_player.visible = false
+		gif_player.stop()
+
+# Helper function to load GIF frames
+func load_gif_frames(gif_path):
+	# In a real implementation, we would load the GIF and convert it to SpriteFrames
+	# For this prototype, we'll create a simple animation with a single frame
+	var frames = SpriteFrames.new()
+	var texture = load(gif_path)
+	if texture:
+		frames.add_animation("default")
+		frames.add_frame("default", texture)
+		return frames
+	return null
 
 # Setup UI meters
 func setup_meters():
@@ -209,6 +286,7 @@ func update_meters():
 	if has_node("WrathBar"):
 		get_node("WrathBar").value = wrath_level
 
+
 # Handle being picked up or dropped
 func _on_area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
@@ -256,6 +334,9 @@ func set_held(held):
 # Interact with an object
 func interact_with_object(object):
 	is_interacting = true
+	
+	# Play the interaction GIF animation
+	play_gif("interaction")
 	
 	if object.name in preferred_objects:
 		play_animation("happy")

@@ -69,9 +69,14 @@ func setup_collision():
 		var area = Area2D.new()
 		area.name = "Area2D"
 		
+		# Get the object's visual size (typically 80x80) and add a small border
+		var obj_width = 80
+		var obj_height = 80
+		var border = 10  # 10 pixel border around the object
+		
 		var collision = CollisionShape2D.new()
 		var shape = RectangleShape2D.new()
-		shape.size = Vector2(80, 80)
+		shape.size = Vector2(obj_width + border * 2, obj_height + border * 2)  # Add border on all sides
 		collision.shape = shape
 		area.add_child(collision)
 		
@@ -117,7 +122,6 @@ func _on_mouse_exited():
 	scale = Vector2(1.0, 1.0)
 
 func _on_area_entered(area):
-	# Check if a pet entered the zone (if this is a zone)
 	if is_zone and area.get_parent() is PetClass:
 		var pet = area.get_parent()
 		pet_interact(pet)
@@ -156,30 +160,31 @@ func release():
 
 # When a pet interacts with this object
 func pet_interact(pet):
-	# We're being used
 	used_by_pet = pet
 	
-	# Have the pet interact with us
 	if pet.has_method("interact_with_object"):
 		pet.interact_with_object(self)
 		
-	# Play interaction animation based on preference
 	if object_name in pet.preferred_objects:
 		play_interaction_animation("preferred")
-		# Add a sparkle effect
 		create_sparkle_effect()
-		# Add to score
 		Globals.add_score(10)
 	elif object_name in pet.forbidden_objects:
 		play_interaction_animation("forbidden")
-		# Add anger particles
 		create_anger_effect()
 	else:
 		play_interaction_animation("neutral")
 	
 	# After interaction time
 	await get_tree().create_timer(2.0).timeout
+	
+	# Clean up references
 	used_by_pet = null
+	
+	# Remove the object from the registry and delete it
+	if not is_zone:  # Don't delete zones, only consumable objects
+		Globals.remove_object(self)
+		queue_free()
 
 # Play the interaction animation
 func play_interaction_animation(interaction_type = "neutral"):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfyexxpv84db0"]
 
 [ext_resource type="Script" uid="uid://be5xiquvogvse" path="res://scripts/room.gd" id="1_d6gta"]
-[ext_resource type="Texture2D" uid="uid://dqvkwckh4dbwm" path="res://assets/temp_room.png" id="2_rjsyl"]
+[ext_resource type="Texture2D" uid="uid://cbl14t5ee7yu1" path="res://assets/roomfinal.png" id="2_rjsyl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfq63"]
 size = Vector2(2000, 500)

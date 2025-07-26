@@ -3,7 +3,8 @@
 Game idea and the layout is created in this project in pet-overflow, the game is 2D scroller, there is one long room where you can move the camera to one and other side and interact with pets, each pet has 2 meters - satisfied, angry.
 
 TODO:
-- [ ] BUG: Gravity doesn't work when releasing objects.
+- [X] BUG: Gravity doesn't work when releasing objects.
+- [ ] BUG: Gravity doesn't work when releasing pets.
 - [ ] BUG: The act of drag and dropping is very laggy, can't properly pick up and let go.
 - [ ] BUG: Some random blue screen blocks that are not even objects or pets keep spawning.
 - [ ] BUG: If the blue stupid block is the same thing, then the unique pet spawning doesn't work.
