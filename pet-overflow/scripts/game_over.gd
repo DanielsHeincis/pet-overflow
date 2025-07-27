@@ -18,9 +18,9 @@ func initialize(pet, cause, score):
 	Initialize game over screen with details about what caused game over
 	
 	Args:
-	    pet (String): Name of the pet that caused game over
-	    cause (String): Reason for game over (satisfaction or wrath overflow)
-	    score (int): Final player score
+		pet (String): Name of the pet that caused game over
+		cause (String): Reason for game over (satisfaction or wrath overflow)
+		score (int): Final player score
 	"""
 	pet_name = pet
 	reason = cause

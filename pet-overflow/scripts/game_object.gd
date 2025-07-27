@@ -247,7 +247,7 @@ func create_anger_effect():
 	particles.spread = 90
 	particles.gravity = Vector2(0, 30)
 	particles.initial_velocity_min = 60
-	particles.scale_amount = 5
+	#particles.scale_amount = 5
 	particles.color = Color(0.8, 0.1, 0.1) # Red anger
 	
 	add_child(particles)

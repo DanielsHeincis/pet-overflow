@@ -8,7 +8,7 @@ script/source = "extends Node
 func _ready():
 	# Configure pet properties
 	var pet = get_parent()
-	pet.pet_name = \"Julijas dators\"
+	pet.pet_name = \"Julija\"
 	pet.draggable = true
 	pet.hates_being_moved = false
 	pet.moves_by_itself = false
