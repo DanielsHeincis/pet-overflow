@@ -39,9 +39,6 @@ offset_bottom = -39.0
 text = "Time"
 horizontal_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_usvai")
-
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="ClockFace" type="CircleShape2D" parent="Sprite"]
@@ -124,6 +121,9 @@ points = PackedVector2Array(-15, 0, -5, 5, 5, 5, 15, 0)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usvai")
+
 [node name="SatisfactionBar" type="ProgressBar" parent="."]
 modulate = Color(0.14902, 0.686275, 0.85098, 1)
 offset_left = -40.0
@@ -139,3 +139,6 @@ offset_top = -32.0
 offset_right = 40.0
 offset_bottom = -22.0
 show_percentage = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Area2D_mouse_exited"]

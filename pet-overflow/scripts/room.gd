@@ -144,7 +144,7 @@ func spawn_random_pet():
 			break
 	
 	print("Spawning pet: ", chosen_pet)
-	
+
 	# Create the pet instance
 	var pet_instance = pet_scenes[chosen_pet].instantiate()
 	

@@ -84,8 +84,7 @@ func _process(delta):
 # Setup visual components
 func setup_visuals():
 	# Check if we already have a proper sprite
-	if has_node("AnimatedSprite2D"):
-		# We already have a proper sprite, no need to create a placeholder
+	if has_node("AnimatedSprite2D") or has_node("Sprite2D") or has_node("Sprite"):
 		return
 		
 	# Create a more distinctive pet placeholder instead of a blue rectangle
@@ -236,39 +235,67 @@ func load_gif_frames(gif_path):
 
 # Setup UI meters
 func setup_meters():
-	# Create container
+	# Panel background
+	var meter_panel = Panel.new()
+	meter_panel.name = "MeterPanel"
+	meter_panel.position = Vector2(-55, -135)
+	meter_panel.size = Vector2(110, 100)
+
+	# Style for the panel
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.6)  # Semi-transparent black
+	style.set_border_width_all(2)
+	style.border_color = Color(1, 1, 1)
+	meter_panel.add_theme_stylebox_override("panel", style)
+
+	# Container inside the panel
 	var meter_container = VBoxContainer.new()
-	meter_container.name = "Meters"
-	meter_container.position = Vector2(-50, -130)
-	meter_container.size = Vector2(100, 50)
-	
-	# Satisfaction meter
-	satisfaction_meter = ProgressBar.new()
-	satisfaction_meter.max_value = 100
-	satisfaction_meter.value = satisfaction_level
-	satisfaction_meter.size.x = 100
-	
+	meter_container.anchor_right = 1.0
+	meter_container.anchor_bottom = 1.0
+	meter_container.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	meter_container.grow_vertical = Control.GROW_DIRECTION_BOTH
+	meter_container.anchor_left = 0.0
+	meter_container.anchor_top = 0.0
+	meter_container.anchor_right = 1.0
+	meter_container.anchor_bottom = 1.0
+
+	meter_container.offset_left = 5
+	meter_container.offset_top = 5
+	meter_container.offset_right = -5
+	meter_container.offset_bottom = -5
+
+	# Satisfaction label + bar
 	var sat_label = Label.new()
 	sat_label.text = "Satisfaction"
 	sat_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
-	# Wrath meter
-	wrath_meter = ProgressBar.new()
-	wrath_meter.max_value = 100
-	wrath_meter.value = wrath_level
-	wrath_meter.size.x = 100
-	
+
+	satisfaction_meter = ProgressBar.new()
+	satisfaction_meter.max_value = 100
+	satisfaction_meter.value = satisfaction_level
+	satisfaction_meter.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	# Wrath label + bar
 	var wrath_label = Label.new()
 	wrath_label.text = "Wrath"
 	wrath_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
-	# Add to container
+
+	wrath_meter = ProgressBar.new()
+	wrath_meter.max_value = 100
+	wrath_meter.value = wrath_level
+	wrath_meter.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	# Add all to container
 	meter_container.add_child(sat_label)
 	meter_container.add_child(satisfaction_meter)
 	meter_container.add_child(wrath_label)
 	meter_container.add_child(wrath_meter)
-	
-	add_child(meter_container)
+
+	# Add container to panel and panel to pet
+	meter_panel.add_child(meter_container)
+	add_child(meter_panel)
+
+	# Hide by default (for hover logic)
+	meter_panel.visible = false
 
 # Update UI meters
 func update_meters():
@@ -429,3 +456,11 @@ func play_animation(anim_name):
 				
 			# Reset color after animation
 			tween.tween_property(color_rect, "color", original_color, 2.0)
+
+func _on_Area2D_mouse_entered():
+	if has_node("MeterPanel"):
+		get_node("MeterPanel").visible = true
+
+func _on_Area2D_mouse_exited():
+	if has_node("MeterPanel"):
+		get_node("MeterPanel").visible = false

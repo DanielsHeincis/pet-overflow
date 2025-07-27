@@ -32,13 +32,13 @@ func _process(delta):
 	var movement = Vector2.ZERO
 	
 	# Check for keyboard input
-	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_d"):
+	if Input.is_action_pressed("ui_right"):
 		movement.x += 1
-	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_a"):
+	if Input.is_action_pressed("ui_left"):
 		movement.x -= 1
-	if Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_s"):
+	if Input.is_action_pressed("ui_down"):
 		movement.y += 1
-	if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_w"):
+	if Input.is_action_pressed("ui_up"):
 		movement.y -= 1
 	
 	# Normalize movement vector to prevent diagonal movement from being faster
