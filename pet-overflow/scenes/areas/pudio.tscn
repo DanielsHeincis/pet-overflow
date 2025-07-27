@@ -1,68 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfyexxpv84db0"]
+[gd_scene load_steps=6 format=3 uid="uid://bfyexxpv84db0"]
 
 [ext_resource type="Script" uid="uid://be5xiquvogvse" path="res://scripts/room.gd" id="1_d6gta"]
 [ext_resource type="Texture2D" uid="uid://cbl14t5ee7yu1" path="res://assets/roomfinal.png" id="2_rjsyl"]
+[ext_resource type="Texture2D" uid="uid://cvqaq61hn7hoa" path="res://assets/roomfinal2.png" id="3_5q7hl"]
 [ext_resource type="Script" uid="uid://ci3jbnvyxslc5" path="res://scripts/camera_controller.gd" id="3_yinoh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfq63"]
-size = Vector2(2000, 500)
+size = Vector2(995, 500)
 
 [node name="Pudio" type="Node2D"]
 script = ExtResource("1_d6gta")
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.63, 1)
 texture = ExtResource("2_rjsyl")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 2000, 500)
 
+[node name="Roomfinal2" type="Sprite2D" parent="."]
+position = Vector2(497, 250)
+scale = Vector2(0.83, 0.83)
+texture = ExtResource("3_5q7hl")
+
 [node name="Bounds" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="RoomArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea"]
-position = Vector2(1000, 250)
+position = Vector2(497.5, 250)
 shape = SubResource("RectangleShape2D_sfq63")
 
 [node name="ObjectSpawnPoints" type="Node2D" parent="."]
 
 [node name="Point1" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(200, 250)
+position = Vector2(64, 425)
 
 [node name="Point2" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(500, 250)
+position = Vector2(457, 434)
 
 [node name="Point3" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(800, 250)
+position = Vector2(664, 450)
 
 [node name="Point4" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(1200, 250)
+position = Vector2(576, 445)
 
 [node name="Point5" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(1500, 250)
+position = Vector2(522, 440)
 
 [node name="Point6" type="Marker2D" parent="ObjectSpawnPoints"]
-position = Vector2(1800, 250)
+position = Vector2(404, 438)
 
 [node name="PetSpawnPoints" type="Node2D" parent="."]
 
 [node name="Point1" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(200, 400)
+position = Vector2(196, 423)
 
 [node name="Point2" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(500, 400)
+position = Vector2(328, 427)
 
 [node name="Point3" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(800, 400)
+position = Vector2(798, 451)
 
 [node name="Point4" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(1200, 400)
+position = Vector2(908, 455)
 
 [node name="Point5" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(1500, 400)
+position = Vector2(126, 438)
 
 [node name="Point6" type="Marker2D" parent="PetSpawnPoints"]
-position = Vector2(1800, 400)
+position = Vector2(724, 458)
 
 [node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(509, 260)
 script = ExtResource("3_yinoh")

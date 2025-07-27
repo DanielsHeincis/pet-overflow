@@ -64,6 +64,26 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
 radius = 50.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jed32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ao2qh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g8uuq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6krld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_21y5v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Pupols" type="Area2D"]
 script = ExtResource("1_uflgu")
 
@@ -100,6 +120,11 @@ offset_top = -32.0
 offset_right = 40.0
 offset_bottom = -22.0
 show_percentage = false
+
+[node name="WalkCycle" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0653333, 0.0653333)
+sprite_frames = SubResource("SpriteFrames_jed32")
+frame_progress = 0.419721
 
 [connection signal="mouse_entered" from="." to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Area2D_mouse_exited"]

@@ -177,18 +177,40 @@ func end_game(pet):
 	game_over = true
 	print("Game Over! Pet: ", pet.pet_name)
 	
-	# Play the game over GIF animation for the pet
-	if pet.has_method("play_gif"):
-		pet.play_gif("game_over")
-		# Wait for the GIF to play before showing game over screen
-		await get_tree().create_timer(pet.gif_duration).timeout
-	
 	# Determine reason for game over
 	var reason = ""
+	var death_scene_path = ""
+	
 	if pet.satisfaction_level >= 100:
 		reason = "Satisfaction Overflow"
+		death_scene_path = pet.good_death_scene
 	else:
 		reason = "Wrath Overflow"
+		death_scene_path = pet.bad_death_scene
+	
+	# Check if we have a custom death scene to play
+	if death_scene_path and ResourceLoader.exists(death_scene_path):
+		# Load and instantiate the custom death scene
+		var death_scene = load(death_scene_path)
+		var death_instance = death_scene.instantiate()
+		
+		# Position the death scene at the pet's position
+		death_instance.global_position = pet.global_position
+		
+		# Add to the current scene
+		get_tree().current_scene.add_child(death_instance)
+		
+		# Wait for the death animation to play
+		await get_tree().create_timer(3.0).timeout
+	else:
+		# Fall back to the old GIF system if no custom scene exists
+		if pet.has_method("play_gif"):
+			if pet.satisfaction_level >= 100:
+				pet.play_gif("good_game_over")
+			else:
+				pet.play_gif("game_over")
+			# Wait for the GIF to play before showing game over screen
+			await get_tree().create_timer(pet.gif_duration).timeout
 	
 	# Load game over scene
 	var game_over_scene = load("res://scenes/game_over.tscn")

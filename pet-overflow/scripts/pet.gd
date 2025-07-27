@@ -39,6 +39,11 @@ var animation_player: AnimationPlayer = null
 var satisfaction_meter: ProgressBar = null
 var wrath_meter: ProgressBar = null
 
+# Death scenes
+var good_death_scene: String = ""  # Scene to play when satisfaction is full
+var bad_death_scene: String = ""   # Scene to play when wrath is full
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Setup base components
@@ -65,6 +70,14 @@ func _process(delta):
 	# Follow mouse if being held
 	if is_being_held and draggable:
 		global_position = get_global_mouse_position()
+		
+		# Clamp position to stay within room boundaries
+		var min_x = 50  # Left boundary with offset
+		var max_x = Globals.room_width - 50  # Right boundary with offset
+		var min_y = 50  # Top boundary with offset
+		var max_y = Globals.room_height - 50  # Bottom boundary with offset
+		global_position.x = clamp(global_position.x, min_x, max_x)
+		global_position.y = clamp(global_position.y, min_y, max_y)
 	else:
 		# Handle autonomous pet movement if not being held or interacting
 		if moves_by_itself and not is_interacting and not is_being_held:
@@ -180,23 +193,53 @@ func setup_pet_gifs():
 		game_over_gif = "skeleton-burning.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 4.0  # Longer duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Use appropriate scene
+		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
+	
 	elif pet_type == "Pupols":
-		interaction_gif = "ytuh.gif"
+		interaction_gif = "catkill.gif"
 		game_over_gif = "skeleton-burning.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 2.5  # Medium duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/pupols_good.tscn"
+		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
+	
 	elif pet_type == "Julija":
 		interaction_gif = "ytuh.gif"
-		game_over_gif = "skeleton-burning.gif"
+		game_over_gif = "catkill.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
+		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
 
-	print("setup pet gifs")
-	print(pet_type)
-	print(interaction_gif)
-	print(game_over_gif)
-	print(good_game_over_gif)
-	print(gif_duration)
+	elif pet_type == "Toster":
+		interaction_gif = "ytuh.gif"
+		game_over_gif = "catkill.gif"
+		good_game_over_gif = "catkill.gif"
+		gif_duration = 3.0  # Default duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
+		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
+
+	elif pet_type == "ConceptOfTime":
+		interaction_gif = "ytuh.gif"
+		game_over_gif = "catkill.gif"
+		good_game_over_gif = "catkill.gif"
+		gif_duration = 3.0  # Default duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/concept_of_time_good.tscn"  # Create this scene
+		bad_death_scene = "res://scenes/death/concept_of_time_bad.tscn"    # Create this scene
+	else:
+		interaction_gif = "ytuh.gif"
+		game_over_gif = "catkill.gif"
+		good_game_over_gif = "catkill.gif"
+		gif_duration = 3.0  # Default duration
+		# Death scenes
+		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
+		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
 
 # Setup GIF player for animations
 func setup_gif_player():

@@ -83,6 +83,7 @@ sprite_frames = SubResource("SpriteFrames_lamont")
 animation = &"happy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -1)
 shape = SubResource("CircleShape2D_shape")
 
 [node name="SatisfactionBar" type="ProgressBar" parent="."]
