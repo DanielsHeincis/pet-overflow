@@ -13,6 +13,7 @@ var forbidden_objects = []  # Objects that make pet angry
 # GIF animation properties
 var interaction_gif: String = "ytuh.gif"  # Default interaction GIF
 var game_over_gif: String = "skeleton-burning.gif"  # Default game over GIF
+var good_game_over_gif: String = "catkill.gif"  # Default game over GIF
 var gif_duration: float = 3.0  # Default duration in seconds
 var gif_player: AnimatedSprite2D = null  # AnimatedSprite2D for playing GIFs
 
@@ -173,18 +174,29 @@ func setup_collision():
 # Setup pet-specific GIFs based on pet type
 func setup_pet_gifs():
 	# Assign different GIFs and durations based on pet type
+	
 	if pet_type == "WetOwl":
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "skeleton-burning.gif"
+		good_game_over_gif = "catkill.gif"
 		gif_duration = 4.0  # Longer duration
 	elif pet_type == "Pupols":
-		interaction_gif = "catkill.gif"
+		interaction_gif = "ytuh.gif"
 		game_over_gif = "skeleton-burning.gif"
+		good_game_over_gif = "catkill.gif"
 		gif_duration = 2.5  # Medium duration
 	elif pet_type == "Julija":
 		interaction_gif = "ytuh.gif"
-		game_over_gif = "catkill.gif"
+		game_over_gif = "skeleton-burning.gif"
+		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
+
+	print("setup pet gifs")
+	print(pet_type)
+	print(interaction_gif)
+	print(game_over_gif)
+	print(good_game_over_gif)
+	print(gif_duration)
 
 # Setup GIF player for animations
 func setup_gif_player():
@@ -200,6 +212,7 @@ func setup_gif_player():
 # Play a GIF animation
 func play_gif(gif_type = "interaction"):
 	if not gif_player:
+		print("no gif player")
 		return
 	
 	# Determine which GIF to play
@@ -208,10 +221,13 @@ func play_gif(gif_type = "interaction"):
 		gif_path += interaction_gif
 	else:  # game_over
 		gif_path += game_over_gif
+
+	print("playing gif: " + gif_path)
 	
 	# Load the GIF as SpriteFrames
 	var frames = load_gif_frames(gif_path)
 	if frames:
+		print("loaded gif frames")
 		gif_player.sprite_frames = frames
 		gif_player.visible = true
 		gif_player.play("default")
@@ -220,6 +236,8 @@ func play_gif(gif_type = "interaction"):
 		await get_tree().create_timer(gif_duration).timeout
 		gif_player.visible = false
 		gif_player.stop()
+	else:
+		print("failed to load gif frames")
 
 # Helper function to load GIF frames
 func load_gif_frames(gif_path):
