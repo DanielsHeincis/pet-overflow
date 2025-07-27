@@ -167,13 +167,16 @@ func pet_interact(pet):
 		
 	if object_name in pet.preferred_objects:
 		play_interaction_animation("preferred")
+		$AnimatedSprite2D.play("happy")
 		create_sparkle_effect()
 		Globals.add_score(10)
 	elif object_name in pet.forbidden_objects:
 		play_interaction_animation("forbidden")
+		$AnimatedSprite2D.play("angry")
 		create_anger_effect()
 	else:
 		play_interaction_animation("neutral")
+		$AnimatedSprite2D.play("neutral")
 	
 	# After interaction time
 	await get_tree().create_timer(2.0).timeout

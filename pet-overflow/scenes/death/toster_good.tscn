@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bad",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -189,7 +189,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"good",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -212,7 +212,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"interaction",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [node name="TosterGood" type="Node2D"]
@@ -221,4 +221,4 @@ animations = [{
 scale = Vector2(0.71875, 0.71875)
 sprite_frames = SubResource("SpriteFrames_jstr0")
 animation = &"interaction"
-frame_progress = 0.310616
+frame_progress = 0.322566

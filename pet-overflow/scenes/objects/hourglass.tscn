@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c112ov463r36l"]
+
+[ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_hourglass"]
+[ext_resource type="Texture2D" uid="uid://dfcnm4txbelff" path="res://assets/objects/hourglass.png" id="2_tr1cf"]
+
+[sub_resource type="GDScript" id="GDScript_hourglass"]
+script/source = "extends Node
+
+func _ready():
+	# Configure object properties
+	var obj = get_parent()
+	obj.object_name = \"HourGlass\"
+	obj.is_zone = false  # This is a movable object
+	obj.draggable = true  # Can be picked up and moved
+"
+
+[node name="HourGlass" type="Node2D"]
+script = ExtResource("1_hourglass")
+
+[node name="HourGlassSetup" type="Node" parent="."]
+script = SubResource("GDScript_hourglass")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -34.0
+text = "Hour Glass"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tr1cf")

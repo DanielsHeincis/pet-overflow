@@ -169,14 +169,14 @@ func spawn_random_pet():
 
 func load_object_scenes():
 	# Load scenes manually to avoid preload errors
-	object_scenes["sink"] = load("res://scenes/objects/sink.tscn")
+	#object_scenes["sink"] = load("res://sceness/objects/sink.tscn")
 	object_scenes["card_deck"] = load("res://scenes/objects/card_deck.tscn")
 	object_scenes["hourglass"] = load("res://scenes/objects/hourglass.tscn")
 	object_scenes["jar"] = load("res://scenes/objects/jar.tscn")
 	object_scenes["door"] = load("res://scenes/objects/door.tscn")
 
 
-
+"res://assets/objects/card_deck.png"
 func spawn_random_object():
 	# Random chance to spawn object
 	if randf() > object_spawn_chance:

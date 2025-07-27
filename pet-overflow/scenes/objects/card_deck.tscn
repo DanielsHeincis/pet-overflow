@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bse73q844kb52"]
+[gd_scene load_steps=4 format=3 uid="uid://bse73q844kb52"]
 
 [ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_cards"]
+[ext_resource type="Texture2D" uid="uid://b1qjr70ggsuo2" path="res://assets/objects/card_deck.png" id="2_382ew"]
 
 [sub_resource type="GDScript" id="GDScript_cards"]
 script/source = "extends Node
@@ -27,17 +28,5 @@ offset_bottom = -34.0
 text = "Card Deck"
 horizontal_alignment = 1
 
-[node name="Sprite" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Sprite"]
-offset_left = -30.0
-offset_top = -40.0
-offset_right = 30.0
-offset_bottom = 40.0
-color = Color(0.9, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="Sprite"]
-offset_left = -25.0
-offset_top = -35.0
-offset_right = 25.0
-offset_bottom = 35.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_382ew")

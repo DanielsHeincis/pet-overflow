@@ -446,6 +446,7 @@ func handleAutonomousMovement(delta):
 		else:
 			# Continue moving in the current direction - HORIZONTAL ONLY
 			# Y position stays the same to keep pet on the ground
+			$AnimatedSprite2D.play("walk")
 			global_position.x += move_direction.x * delta * 50 # Movement speed
 			
 			# Keep pet within room bounds
@@ -491,28 +492,6 @@ func play_animation(anim_name):
 		# Create a tween to reset the modulate after animation
 		var tween = create_tween()
 		tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1), 2.0)
-	else:
-		# For pets using ColorRect placeholder
-		if has_node("Sprite/ColorRect"):
-			var color_rect = get_node("Sprite/ColorRect")
-			var original_color = color_rect.color
-			var tween = create_tween()
-			
-			if anim_name == "happy":
-				# Brighten the color
-				color_rect.color = Color(
-					original_color.r * 1.2, 
-					original_color.g * 1.2, 
-					original_color.b * 0.8)
-			elif anim_name == "angry":
-				# Redden the color
-				color_rect.color = Color(
-					min(original_color.r * 1.5, 1.0), 
-					original_color.g * 0.5, 
-					original_color.b * 0.5)
-				
-			# Reset color after animation
-			tween.tween_property(color_rect, "color", original_color, 2.0)
 
 func _on_Area2D_mouse_entered():
 	if has_node("MeterPanel"):
