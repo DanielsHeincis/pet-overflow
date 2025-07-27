@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://baq03t24bueiv"]
+[gd_scene load_steps=5 format=3 uid="uid://baq03t24bueiv"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_k74vf"]
 
@@ -23,6 +23,29 @@ func _ready():
 		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.7, 0.3)
 "
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ph1bt"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
 radius = 50.0
 
@@ -40,7 +63,8 @@ offset_bottom = -67.0
 text = "Time"
 horizontal_alignment = 1
 
-[node name="Sprite" type="Node2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ph1bt")
 
 [node name="ClockFace" type="CircleShape2D" parent="Sprite"]
 _import_path = NodePath("")

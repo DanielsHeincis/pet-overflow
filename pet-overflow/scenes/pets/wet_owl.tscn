@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6juapaxh8v02"]
+[gd_scene load_steps=11 format=3 uid="uid://c6juapaxh8v02"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_2tyep"]
 [ext_resource type="Texture2D" uid="uid://cm6c3qe6nyyvk" path="res://assets/lamont-wet owl/lamont1.png" id="2_maq8u"]
+[ext_resource type="Texture2D" uid="uid://clllw5yvs3kt7" path="res://assets/lamont-wet owl/angrylamont.png" id="2_vetjt"]
+[ext_resource type="Texture2D" uid="uid://db13m1rwq420v" path="res://assets/lamont-wet owl/happylamont.png" id="3_ba1s4"]
 [ext_resource type="Texture2D" uid="uid://bnco1k7kl1gew" path="res://assets/lamont-wet owl/lamont2.png" id="3_v4wm6"]
 [ext_resource type="Texture2D" uid="uid://cpa4tfsr60xm4" path="res://assets/lamont-wet owl/lamon3.png" id="4_coqli"]
 [ext_resource type="Texture2D" uid="uid://csnpbpn7jbkei" path="res://assets/lamont-wet owl/lamont4.png" id="5_cvyia"]
@@ -26,6 +28,22 @@ func _ready():
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_vetjt")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ba1s4")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_maq8u")
 }, {
 "duration": 1.0,
@@ -38,7 +56,7 @@ animations = [{
 "texture": ExtResource("5_cvyia")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -62,7 +80,7 @@ horizontal_alignment = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lamont")
-frame_progress = 0.142678
+animation = &"happy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_shape")

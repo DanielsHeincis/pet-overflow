@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmde71jepxi7a"]
+[gd_scene load_steps=6 format=3 uid="uid://dmde71jepxi7a"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_anhdg"]
+[ext_resource type="Texture2D" uid="uid://dt6u3uu8xcc6r" path="res://assets/objects/Julija.webp" id="2_qtadt"]
 
 [sub_resource type="GDScript" id="GDScript_julija"]
 script/source = "extends Node
@@ -28,6 +29,33 @@ func _ready():
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6qut"]
 size = Vector2(104, 104)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtadt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qtadt")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qtadt")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qtadt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [node name="Julija" type="Area2D"]
 script = ExtResource("1_anhdg")
 
@@ -42,17 +70,14 @@ offset_bottom = -57.0
 text = "Julija"
 horizontal_alignment = 1
 
-[node name="Sprite" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Sprite"]
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
-color = Color(0.6, 0.2, 0.8, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g6qut")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 15)
+scale = Vector2(0.634615, 0.634615)
+sprite_frames = SubResource("SpriteFrames_qtadt")
+animation = &"angry"
 
 [node name="SatisfactionBar" type="ProgressBar" parent="."]
 modulate = Color(0.14902, 0.686275, 0.85098, 1)
