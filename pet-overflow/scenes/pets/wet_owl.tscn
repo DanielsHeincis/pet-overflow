@@ -16,8 +16,8 @@ func _ready():
 	pet.draggable = true
 	pet.moves_by_itself = true  # Enable autonomous movement
 	pet.hates_being_moved = false
-	pet.preferred_objects = [\"water_glass\"]
-	pet.forbidden_objects = [\"bath\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\"]
+	pet.preferred_objects = [\"WaterGlass\"]
+	pet.forbidden_objects = [\"Bath\", \"CardDeck\", \"Gameboy\", \"HourGlass\", \"JamJar\", \"OutsideDoor\", \"Toast\", \"WoodenSpoon\"]
 	pet.satisfaction_decay_rate = 0.05
 	pet.wrath_increase_rate = 0.2
 "
@@ -53,9 +53,9 @@ script = SubResource("GDScript_wetowl")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -32.0
-offset_top = -65.0
-offset_right = 32.0
-offset_bottom = -39.0
+offset_top = -68.0
+offset_right = 33.0
+offset_bottom = -42.0
 text = "Wet Owl"
 horizontal_alignment = 1
 
@@ -70,17 +70,17 @@ shape = SubResource("CircleShape2D_shape")
 [node name="SatisfactionBar" type="ProgressBar" parent="."]
 modulate = Color(0.14902, 0.686275, 0.85098, 1)
 offset_left = -40.0
-offset_top = -45.0
+offset_top = -47.0
 offset_right = 40.0
-offset_bottom = -35.0
+offset_bottom = -37.0
 show_percentage = false
 
 [node name="WrathBar" type="ProgressBar" parent="."]
 modulate = Color(0.866667, 0.12549, 0.12549, 1)
 offset_left = -40.0
-offset_top = -32.0
+offset_top = -34.0
 offset_right = 40.0
-offset_bottom = -22.0
+offset_bottom = -24.0
 show_percentage = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_Area2D_mouse_entered"]

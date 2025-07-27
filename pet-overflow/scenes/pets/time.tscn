@@ -13,14 +13,15 @@ func _ready():
 	pet.moves_by_itself = true
 	pet.hates_being_moved = true
 	# Time only loves hour glass, hates everything else
-	pet.preferred_objects = [\"hour_glass\"]
-	pet.forbidden_objects = [\"bath\", \"water_glass\", \"card_deck\", \"gameboy\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"puddle\"]
+	pet.preferred_objects = [\"HourGlass\"]
+	pet.forbidden_objects = [\"Bath\", \"WaterGlass\", \"CardDeck\", \"Gameboy\", \"JamJar\", \"OutsideDoor\", \"Toast\", \"WoodenSpoon\", \"Puddle\"]
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.15  # Gets unsatisfied quickly
 	pet.wrath_increase_rate = 0.05
 	# Make sprite a nice green color
 	if pet.has_node(\"Sprite/ColorRect\"):
-		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.7, 0.3)"
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.2, 0.7, 0.3)
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
 radius = 50.0
@@ -33,9 +34,9 @@ script = SubResource("GDScript_time")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -32.0
-offset_top = -65.0
+offset_top = -93.0
 offset_right = 32.0
-offset_bottom = -39.0
+offset_bottom = -67.0
 text = "Time"
 horizontal_alignment = 1
 
@@ -127,17 +128,17 @@ shape = SubResource("CircleShape2D_usvai")
 [node name="SatisfactionBar" type="ProgressBar" parent="."]
 modulate = Color(0.14902, 0.686275, 0.85098, 1)
 offset_left = -40.0
-offset_top = -45.0
+offset_top = -69.0
 offset_right = 40.0
-offset_bottom = -35.0
+offset_bottom = -59.0
 show_percentage = false
 
 [node name="WrathBar" type="ProgressBar" parent="."]
 modulate = Color(0.866667, 0.12549, 0.12549, 1)
 offset_left = -40.0
-offset_top = -32.0
+offset_top = -56.0
 offset_right = 40.0
-offset_bottom = -22.0
+offset_bottom = -46.0
 show_percentage = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_Area2D_mouse_entered"]

@@ -223,8 +223,8 @@ func create_sparkle_effect():
 	particles.direction = Vector2(0, -1)
 	particles.spread = 180
 	particles.gravity = Vector2(0, 98)
-	particles.initial_velocity = 100
-	particles.scale_amount = 4
+	particles.initial_velocity_min = 100
+	#particles.scale_amount = 4
 	particles.color = Color(1, 1, 0.5) # Yellow sparkles
 	
 	add_child(particles)
@@ -246,7 +246,7 @@ func create_anger_effect():
 	particles.direction = Vector2(0, -1)
 	particles.spread = 90
 	particles.gravity = Vector2(0, 30)
-	particles.initial_velocity = 60
+	particles.initial_velocity_min = 60
 	particles.scale_amount = 5
 	particles.color = Color(0.8, 0.1, 0.1) # Red anger
 	

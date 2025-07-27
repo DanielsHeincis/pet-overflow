@@ -361,11 +361,13 @@ func set_held(held):
 # Interact with an object
 func interact_with_object(object):
 	is_interacting = true
-	
+	print("interacting")
+	print(object.name)
 	# Play the interaction GIF animation
 	play_gif("interaction")
 	
 	if object.name in preferred_objects:
+		print("satisfaction increse")
 		play_animation("happy")
 		satisfaction_level += 20
 		wrath_level = max(0, wrath_level - 10)

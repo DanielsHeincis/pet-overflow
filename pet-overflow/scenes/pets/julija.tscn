@@ -13,8 +13,8 @@ func _ready():
 	pet.hates_being_moved = false
 	pet.moves_by_itself = false
 	# Julija loves jam jar, wooden spoons, gameboys
-	pet.preferred_objects = [\"jam_jar\", \"wooden_spoon\", \"gameboy\"]
-	pet.forbidden_objects = [\"bath\", \"water_glass\", \"card_deck\", \"hour_glass\", \"outside_door\", \"toast\", \"puddle\"]
+	pet.preferred_objects = [\"JamJar\", \"WoodenSpoon\", \"Gameboy\"]
+	pet.forbidden_objects = [\"Bath\", \"WaterGlass\", \"CardDeck\", \"HourGlass\", \"OutsideDoor\", \"toast\", \"puddle\"]
 	# Custom satisfaction and wrath rates - gets angry faster
 	pet.satisfaction_decay_rate = 0.08
 	pet.wrath_increase_rate = 0.15

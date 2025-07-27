@@ -13,8 +13,8 @@ func _ready():
 	pet.hates_being_moved = true
 	pet.moves_by_itself = true
 	# Pupols loves playing cards, hates everything else (especially water/bath)
-	pet.preferred_objects = [\"card_deck\"] 
-	pet.forbidden_objects = [\"bath\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\", \"gameboy\"] 
+	pet.preferred_objects = [\"CardDeck\"] 
+	pet.forbidden_objects = [\"Bath\", \"HourGlass\", \"JamJar\", \"OutsideDoor\", \"Toast\", \"WoodenSpoon\", \"gameboy\"] 
 	# Custom satisfaction and wrath rates
 	pet.satisfaction_decay_rate = 0.12
 	pet.wrath_increase_rate = 0.08
@@ -34,13 +34,13 @@ script = SubResource("GDScript_pupols")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -32.0
-offset_top = -65.0
+offset_top = -74.0
 offset_right = 32.0
-offset_bottom = -39.0
+offset_bottom = -48.0
 text = "Pupols"
 horizontal_alignment = 1
 
-[node name="Sprite" type="Node2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Sprite"]
 offset_left = -50.0
