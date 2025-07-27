@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://8i2tba1pgn84"]
+
+[ext_resource type="Script" uid="uid://djbchk8yfsda0" path="res://scenes/objects/sink.gd" id="1_4812f"]
+
+[node name="Sink" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_4812f")

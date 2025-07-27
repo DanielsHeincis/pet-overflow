@@ -31,16 +31,10 @@ func _ready():
 	pet.moves_by_itself = true
 	pet.hates_being_moved = false
 	# Toaster loves toast and outside door (walks)
-	pet.preferred_objects = [\"Toast\", \"OutsideDoor\"]
-	pet.forbidden_objects = [\"Bath\", \"WaterGlass\", \"CardDeck\", \"Gameboy\", \"HourGlass\", \"JamJar\", \"WoodenSpoon\", \"Puddle\"]
-	# Highest spawn rate as per README
-	# To be implemented in spawn manager
-	# Custom satisfaction and wrath rates
-	pet.satisfaction_decay_rate = 0.07  # Gets unsatisfied slowly
-	pet.wrath_increase_rate = 0.12  # But gets angry faster
-	# Make sprite a nice red color
-	if pet.has_node(\"Sprite/ColorRect\"):
-		pet.get_node(\"Sprite/ColorRect\").color = Color(0.8, 0.2, 0.2)
+	pet.preferred_objects = [\"OutsideDoor\"]
+	pet.forbidden_objects = [\"Sink\", \"CardDeck\", \"HourGlass\", \"JamJar\"]
+	pet.satisfaction_decay_rate = 0.07 
+	pet.wrath_increase_rate = 0.12 
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6rh4p"]
@@ -146,7 +140,7 @@ horizontal_alignment = 1
 position = Vector2(-18, 12)
 scale = Vector2(0.07975, 0.07975)
 sprite_frames = SubResource("SpriteFrames_6rh4p")
-animation = &"happy"
+animation = &"interaction"
 
 [node name="Body" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -40.0

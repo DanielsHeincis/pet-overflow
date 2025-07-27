@@ -7,11 +7,10 @@
 script/source = "extends Node
 
 func _ready():
-	# Configure object properties
 	var obj = get_parent()
-	obj.object_name = \"OutsideDoor\"
-	obj.is_zone = true  # This is a zone, not a movable object
-	obj.draggable = false  # Cannot be picked up and moved
+	obj.object_name = \"Sink\"
+	obj.is_zone = false
+	obj.draggable = false
 "
 
 [node name="OutsideDoor" type="Node2D"]

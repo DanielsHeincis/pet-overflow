@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck3tp5m0ylu4a"]
+
+[ext_resource type="Texture2D" uid="uid://dogdcyhp0ldx" path="res://assets for testing/activityobjects/sink.png" id="1_4812f"]
+[ext_resource type="Script" uid="uid://k44c2nyuwjs0" path="res://scripts/game_object.gd" id="1_iq2s1"]
+
+[sub_resource type="GDScript" id="GDScript_jamjar"]
+script/source = "extends Node
+
+func _ready():
+	var obj = get_parent()
+	obj.object_name = \"Sink\"
+	obj.is_zone = false
+	obj.draggable = true
+"
+
+[node name="Sink" type="Node2D"]
+script = ExtResource("1_iq2s1")
+
+[node name="SinkSetup" type="Node" parent="."]
+script = SubResource("GDScript_jamjar")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -34.0
+text = "Sink"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4812f")

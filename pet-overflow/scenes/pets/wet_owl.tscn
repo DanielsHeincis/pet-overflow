@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6juapaxh8v02"]
+[gd_scene load_steps=31 format=3 uid="uid://c6juapaxh8v02"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_2tyep"]
 [ext_resource type="Texture2D" uid="uid://cm6c3qe6nyyvk" path="res://assets/lamont-wet owl/lamont1.png" id="2_maq8u"]
@@ -6,7 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://db13m1rwq420v" path="res://assets/lamont-wet owl/happylamont.png" id="3_ba1s4"]
 [ext_resource type="Texture2D" uid="uid://bnco1k7kl1gew" path="res://assets/lamont-wet owl/lamont2.png" id="3_v4wm6"]
 [ext_resource type="Texture2D" uid="uid://cpa4tfsr60xm4" path="res://assets/lamont-wet owl/lamon3.png" id="4_coqli"]
+[ext_resource type="Texture2D" uid="uid://d2v01y6u3qa1b" path="res://assets for testing/lamont-wet owl/activitylamont/0and22.png" id="4_v1tlh"]
 [ext_resource type="Texture2D" uid="uid://csnpbpn7jbkei" path="res://assets/lamont-wet owl/lamont4.png" id="5_cvyia"]
+[ext_resource type="Texture2D" uid="uid://druk03lc8nkge" path="res://assets for testing/lamont-wet owl/activitylamont/1.png" id="5_hjlqm"]
+[ext_resource type="Texture2D" uid="uid://daaonth4o8ala" path="res://assets for testing/lamont-wet owl/activitylamont/2.png" id="6_xf01g"]
+[ext_resource type="Texture2D" uid="uid://cs074bho7g3s0" path="res://assets for testing/lamont-wet owl/activitylamont/3.png" id="7_q81x1"]
+[ext_resource type="Texture2D" uid="uid://ddkr6o8lvwfrt" path="res://assets for testing/lamont-wet owl/activitylamont/4.png" id="8_dn02e"]
+[ext_resource type="Texture2D" uid="uid://doy38md7hga8q" path="res://assets for testing/lamont-wet owl/activitylamont/6.png" id="9_xn4gm"]
+[ext_resource type="Texture2D" uid="uid://dcb27l3ltgsdt" path="res://assets for testing/lamont-wet owl/activitylamont/7.png" id="10_iirg6"]
+[ext_resource type="Texture2D" uid="uid://boqqqg7td6l4k" path="res://assets for testing/lamont-wet owl/activitylamont/8.png" id="11_lhfsh"]
+[ext_resource type="Texture2D" uid="uid://b7m2magwhbpm8" path="res://assets for testing/lamont-wet owl/activitylamont/9.png" id="12_3mdul"]
+[ext_resource type="Texture2D" uid="uid://co63kxo2t4u5i" path="res://assets for testing/lamont-wet owl/activitylamont/10.png" id="13_rrnsk"]
+[ext_resource type="Texture2D" uid="uid://ups5i6meg6ph" path="res://assets for testing/lamont-wet owl/activitylamont/11.png" id="14_nsc8d"]
+[ext_resource type="Texture2D" uid="uid://ckmrox8ecdpk2" path="res://assets for testing/lamont-wet owl/activitylamont/12.png" id="15_0fkrk"]
+[ext_resource type="Texture2D" uid="uid://kojddvwul8og" path="res://assets for testing/lamont-wet owl/activitylamont/13.png" id="16_ephpd"]
+[ext_resource type="Texture2D" uid="uid://cly6gine8p4s6" path="res://assets for testing/lamont-wet owl/activitylamont/14.png" id="17_fcodd"]
+[ext_resource type="Texture2D" uid="uid://d4h430egdwcx8" path="res://assets for testing/lamont-wet owl/activitylamont/15.png" id="18_hr2bk"]
+[ext_resource type="Texture2D" uid="uid://dei5847yw2jc7" path="res://assets for testing/lamont-wet owl/activitylamont/16.png" id="19_dh30j"]
+[ext_resource type="Texture2D" uid="uid://dabxxepk353ys" path="res://assets for testing/lamont-wet owl/activitylamont/17.png" id="20_gpy34"]
+[ext_resource type="Texture2D" uid="uid://du885s2qnop07" path="res://assets for testing/lamont-wet owl/activitylamont/18.png" id="21_k76gt"]
+[ext_resource type="Texture2D" uid="uid://cupwa6510g5vt" path="res://assets for testing/lamont-wet owl/activitylamont/19and21.png" id="22_4hcgr"]
+[ext_resource type="Texture2D" uid="uid://cuuiuo5ohixh" path="res://assets for testing/lamont-wet owl/activitylamont/20.png" id="23_yw8i0"]
 
 [sub_resource type="GDScript" id="GDScript_wetowl"]
 script/source = "extends Node
@@ -16,10 +36,10 @@ func _ready():
 	var pet = get_parent()
 	pet.pet_name = \"Wet Owl\"
 	pet.draggable = true
-	pet.moves_by_itself = true  # Enable autonomous movement
+	pet.moves_by_itself = true 
 	pet.hates_being_moved = false
-	pet.preferred_objects = [\"WaterGlass\"]
-	pet.forbidden_objects = [\"Bath\", \"CardDeck\", \"Gameboy\", \"HourGlass\", \"JamJar\", \"OutsideDoor\", \"Toast\", \"WoodenSpoon\"]
+	pet.preferred_objects = [\"Sink\"]
+	pet.forbidden_objects = [\"CardDeck\", \"HourGlass\", \"JamJar\", \"OutsideDoor\"]
 	pet.satisfaction_decay_rate = 0.05
 	pet.wrath_increase_rate = 0.2
 "
@@ -44,6 +64,71 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_v1tlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hjlqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xf01g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q81x1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dn02e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xn4gm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_iirg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_lhfsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3mdul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_rrnsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nsc8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0fkrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ephpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fcodd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_hr2bk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dh30j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_gpy34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_k76gt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4hcgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_yw8i0")
+}],
+"loop": true,
+"name": &"interaction",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_maq8u")
 }],
 "loop": true,
@@ -65,7 +150,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_shape"]
@@ -88,7 +173,7 @@ horizontal_alignment = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lamont")
-animation = &"neutral"
+animation = &"happy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -1)

@@ -7,11 +7,10 @@
 script/source = "extends Node
 
 func _ready():
-	# Configure object properties
 	var obj = get_parent()
 	obj.object_name = \"CardDeck\"
-	obj.is_zone = false  # This is a movable object
-	obj.draggable = true  # Can be picked up and moved
+	obj.is_zone = false
+	obj.draggable = true
 "
 
 [node name="CardDeck" type="Node2D"]

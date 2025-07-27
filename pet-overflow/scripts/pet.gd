@@ -3,31 +3,23 @@ class_name Pet
 
 # Pet properties
 var pet_name: String = "Unknown Pet"
-var pet_type: String = "Generic"
-var draggable: bool = true  # Some pets may not be movable
-var hates_being_moved: bool = false # Some pets hate being moved
-var moves_by_itself: bool = false # Some pets move on their own
-var preferred_objects = []  # Objects that satisfy this pet
-var forbidden_objects = []  # Objects that make pet angry
+var draggable: bool = true
+var hates_being_moved: bool = false
+var moves_by_itself: bool = false
+var preferred_objects = []
+var forbidden_objects = []
 var asprite = null
 
-# GIF animation properties
-var gif_duration: float = 3.0  # Default duration in seconds
-var gif_player: AnimatedSprite2D = null  # AnimatedSprite2D for playing GIFs
+var interaction_scene: PackedScene = null 
+var good_death_scene: PackedScene = null  
+var bad_death_scene: PackedScene = null   
+var current_animation_instance = null     
 
-# Death scene animations
-var interaction_scene: PackedScene = null  # Scene to play during interactions
-var good_death_scene: PackedScene = null  # Scene to play when satisfaction is full
-var bad_death_scene: PackedScene = null   # Scene to play when wrath is full
-var current_animation_instance = null     # Track current playing animation
+var satisfaction_level: float = 0
+var wrath_level: float = 0
+var satisfaction_decay_rate: float = 0.1
+var wrath_increase_rate: float = 0.05
 
-# Meters
-var satisfaction_level: float = 0  # 0-100
-var wrath_level: float = 0  # 0-100
-var satisfaction_decay_rate: float = 0.1  # How fast satisfaction decreases
-var wrath_increase_rate: float = 0.05  # How fast wrath increases
-
-# State
 var is_being_held: bool = false
 var is_interacting: bool = false
 var is_moving: bool = false
@@ -35,142 +27,56 @@ var move_direction: Vector2 = Vector2.ZERO
 var move_timer: float = 0.0
 var idle_timer: float = 0.0
 
-# Visual components
 var sprite: Sprite2D = null
 var animation_player: AnimationPlayer = null
 
-# UI components
 var satisfaction_meter: ProgressBar = null
 var wrath_meter: ProgressBar = null
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	# Setup base components
-	setup_visuals()
 	setup_collision()
 	setup_meters()
-	setup_pet_gifs()  # Set up pet-specific GIFs
-	setup_gif_player()
-	
-	# Connect input events - handled by Area2D instead
-	# No direct input_event connection needed
+	setup_pet_gifs() 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Update meters over time if not interacting
 	if not is_interacting:
 		satisfaction_level = max(0, satisfaction_level - satisfaction_decay_rate * delta * 10)
 		wrath_level = min(100, wrath_level + wrath_increase_rate * delta * 10)
 	
-	# Update UI
 	update_meters()
 	
-	# Follow mouse if being held
 	if is_being_held and draggable:
 		global_position = get_global_mouse_position()
 		
-		# Clamp position to stay within room boundaries
-		var min_x = 50  # Left boundary with offset
-		var max_x = Globals.room_width - 50  # Right boundary with offset
-		var min_y = 50  # Top boundary with offset
-		var max_y = Globals.room_height - 50  # Bottom boundary with offset
+		var min_x = 50
+		var max_x = Globals.room_width - 50
+		var min_y = 50
+		var max_y = Globals.room_height - 50
 		global_position.x = clamp(global_position.x, min_x, max_x)
 		global_position.y = clamp(global_position.y, min_y, max_y)
 	else:
-		# Handle autonomous pet movement if not being held or interacting
 		if moves_by_itself and not is_interacting and not is_being_held:
 			handleAutonomousMovement(delta)
 		
-	# Check for overflow conditions
 	if satisfaction_level >= 100 or wrath_level >= 100:
-		# Pet is going to explode (satisfaction) or rampage (wrath)!
 		if not is_interacting:
 			if satisfaction_level >= 100:
 				play_animation("happy")
 			else:
 				play_animation("angry")
 				
-			# Let globals handle the game over
 			Globals.end_game(self)
 
-# Setup visual components
-func setup_visuals():
-	# Check if we already have a proper sprite
-	if has_node("AnimatedSprite2D") or has_node("Sprite2D") or has_node("Sprite"):
-		return
-		
-	# Create a more distinctive pet placeholder instead of a blue rectangle
-	var sprite_node = Node2D.new()
-	sprite_node.name = "Sprite"
-	add_child(sprite_node)
-	
-	# Create a more pet-like shape with multiple parts
-	# Body
-	var body = ColorRect.new()
-	body.size = Vector2(80, 60)
-	body.position = Vector2(-40, -40)
-	
-	# Randomize color to distinguish different pets
-	var r = randf_range(0.4, 0.9)
-	var g = randf_range(0.4, 0.9)
-	var b = randf_range(0.4, 0.9)
-	body.color = Color(r, g, b)
-	sprite_node.add_child(body)
-	
-	# Head
-	var head = ColorRect.new()
-	head.size = Vector2(40, 40)
-	head.position = Vector2(-20, -60)
-	head.color = body.color.lightened(0.2) # Slightly lighter than body
-	sprite_node.add_child(head)
-	
-	# Eyes
-	var left_eye = ColorRect.new()
-	left_eye.size = Vector2(8, 8)
-	left_eye.position = Vector2(-15, -55)
-	left_eye.color = Color(0, 0, 0) # Black eyes
-	sprite_node.add_child(left_eye)
-	
-	var right_eye = ColorRect.new()
-	right_eye.size = Vector2(8, 8)
-	right_eye.position = Vector2(7, -55)
-	right_eye.color = Color(0, 0, 0) # Black eyes
-	sprite_node.add_child(right_eye)
-	
-	# Add pet name label
-	var name_label = Label.new()
-	name_label.text = pet_name
-	name_label.position = Vector2(-40, -90)
-	name_label.size = Vector2(80, 20)
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var font_settings = LabelSettings.new()
-	font_settings.font_size = 12
-	font_settings.outline_size = 1
-	font_settings.outline_color = Color(0, 0, 0)
-	name_label.label_settings = font_settings
-	sprite_node.add_child(name_label)
-	
-	# Create collision shape if not present
-	if not has_node("CollisionShape2D"):
-		var shape = CollisionShape2D.new()
-		var circle = CircleShape2D.new()
-		circle.radius = 50
-		shape.shape = circle
-		add_child(shape)
-
-# Setup collision for interaction
 func setup_collision():
-	# Add area for interaction
 	if not has_node("Area2D"):
 		var area = Area2D.new()
 		area.name = "Area2D"
 		
-		# Get the pet's visual size (body is 80x80) and add a small border
 		var pet_width = 80
 		var pet_height = 80
-		var border = 10  # 10 pixel border around the pet
+		var border = 10 
 		
 		var collision = CollisionShape2D.new()
 		var shape = RectangleShape2D.new()
@@ -184,56 +90,30 @@ func setup_collision():
 		
 		add_child(area)
 
-# Setup pet-specific GIFs based on pet type
 func setup_pet_gifs():
-	# Assign different GIFs and durations based on pet type
-	
-	# Default animation scenes for all pets
-	interaction_scene = load("res://scenes/death/toster_good.tscn")
-	good_death_scene = load("res://scenes/death/toster_good.tscn")
-	bad_death_scene = load("res://scenes/death/toster_good.tscn")  # You may want to create a toster_bad.tscn
-	
-	if pet_type == "WetOwl":
-		gif_duration = 4.0  # Longer duration
+	print("setting up gifs for pet type:", pet_name) 
+	if pet_name == "Wet Owl":
+		interaction_scene = load("res://scenes/death/owl.tscn")
+		good_death_scene = load("res://scenes/death/owl.tscn")
+		bad_death_scene = load("res://scenes/death/owl.tscn") 
 		
-	elif pet_type == "Pupols":
-		gif_duration = 2.5  # Medium duration
-		# For Pupols, use the pupols_good scene
-		if ResourceLoader.exists("res://scenes/death/pupols_good.tscn"):
-			good_death_scene = load("res://scenes/death/pupols_good.tscn")
+	elif pet_name == "Gambling addict Pupols":
+		interaction_scene = load("res://scenes/death/pupols_good.tscn")
+		good_death_scene = load("res://scenes/death/pupols_good.tscn")
+		bad_death_scene = load("res://scenes/death/pupols_good.tscn") 
 		
-	# elif pet_type == "Julija":
-	# 	gif_duration = 3.0  # Default duration
-		
-	elif pet_type == "Toster":
-		gif_duration = 3.0  # Default duration
-		
-	# elif pet_type == "ConceptOfTime":
-	# 	gif_duration = 3.0  # Default duration
-		
-	else:
-		gif_duration = 3.0  # Default duration
-
-# Setup GIF player for animations
-func setup_gif_player():
-	# Create AnimatedSprite2D for GIF playback
-	if not has_node("GifPlayer"):
-		gif_player = AnimatedSprite2D.new()
-		gif_player.name = "GifPlayer"
-		gif_player.visible = false  # Hidden by default
-		gif_player.position = Vector2(0, -60)  # Position above the pet
-		gif_player.scale = Vector2(1.5, 1.5)  # Scale up for visibility
-		add_child(gif_player)
+	elif pet_name == "Toaster":
+		interaction_scene = load("res://scenes/death/toster_good.tscn")
+		good_death_scene = load("res://scenes/death/toster_good.tscn")
+		bad_death_scene = load("res://scenes/death/toster_good.tscn") 
 
 
-# Play an animation scene
 func play_animation_scene(animation_type = "interaction"):
-	# Clean up any existing animation instance
 	if current_animation_instance != null and is_instance_valid(current_animation_instance):
 		current_animation_instance.queue_free()
 		current_animation_instance = null
 	
-	# Determine which scene to instantiate
+	print("animation type:", animation_type)
 	var scene_to_use = null
 	if animation_type == "interaction":
 		scene_to_use = interaction_scene
@@ -241,23 +121,17 @@ func play_animation_scene(animation_type = "interaction"):
 		scene_to_use = good_death_scene
 	elif animation_type == "bad_death":
 		scene_to_use = bad_death_scene
+	else:
+		print("No scene to use")
 	
 	if scene_to_use:
-		# Instantiate the scene
 		var instance = scene_to_use.instantiate()
-		
-		# Position it above the pet
-		instance.position = Vector2(0, -60)
-		
-		# Add it as a child of this pet
+		instance.position = Vector2(0, 0)
 		add_child(instance)
-		
-		# Store reference to the instance
 		current_animation_instance = instance
-		
-		# Play the appropriate animation
 		if instance.has_node("AnimatedSprite2D"):
 			var anim_sprite = instance.get_node("AnimatedSprite2D")
+			anim_sprite.position = Vector2.ZERO
 			if animation_type == "interaction":
 				anim_sprite.play("interaction")
 			elif animation_type == "good_death":
@@ -265,11 +139,9 @@ func play_animation_scene(animation_type = "interaction"):
 			elif animation_type == "bad_death":
 				anim_sprite.play("bad")
 			
-			# Set up a timer to remove the animation after it plays
-			var timer = get_tree().create_timer(3.0)
+			var timer = get_tree().create_timer(7.0)
 			await timer.timeout
 			
-			# Clean up the animation
 			if current_animation_instance != null and is_instance_valid(current_animation_instance):
 				current_animation_instance.queue_free()
 				current_animation_instance = null
@@ -385,44 +257,35 @@ func _on_area_input_event(_viewport, event, _shape_idx):
 						modulate = Color(1, 0, 0)
 						var tween = create_tween()
 						tween.tween_property(self, "modulate", Color(1, 1, 1), 0.5)
-			else: # Button released
-				# Drop the pet if we're holding it
+			else:
 				if Globals.is_holding_pet() and Globals.held_pet == self:
 					Globals.drop_pet()
 
-# Mouse hover feedback
 func _on_mouse_entered():
 	if draggable:
 		scale = Vector2(1.1, 1.1)
 
-# Mouse exit feedback
 func _on_mouse_exited():
 	scale = Vector2(1.0, 1.0)
 
-# Detect when the pet is grabbed or released
 func set_held(held):
 	is_being_held = held
-	
-	# If pet hates being moved, increase wrath when picked up
 	if held and hates_being_moved:
 		wrath_level += 10
 		play_animation("angry")
 		update_meters()
 	if held:
-		z_index = 10  # Bring to front
+		z_index = 10 
 	else:
 		z_index = 0
 
-# Interact with an object
 func interact_with_object(object):
 	is_interacting = true
 	print("interacting")
 	print(object.name)
 	
-	# Play the interaction animation scene
-	play_animation_scene("interaction")
-	
 	if object.name in preferred_objects:
+		play_animation_scene("interaction")
 		print("satisfaction increse")
 		play_animation("happy")
 		satisfaction_level += 20
@@ -447,33 +310,22 @@ func handleAutonomousMovement(delta):
 			play_animation("idle")
 			asprite.play("neutral")
 		else:
-			# Continue moving in the current direction - HORIZONTAL ONLY
-			# Y position stays the same to keep pet on the ground
 			asprite.play("walk")
 			global_position.x += move_direction.x * delta * 50 # Movement speed
-			
-			# Keep pet within room bounds
 			var room_width = Globals.room_width
 			global_position.x = clamp(global_position.x, 50, room_width - 50)
 			
-			# Flip sprite based on movement direction
 			if has_node("Sprite") or has_node("AnimatedSprite2D"):
 				if has_node("Sprite2D"):
 					$Sprite2D.flip_h = move_direction.x < 0
 				elif has_node("AnimatedSprite2D"):
-					#$AnimatedSprite2D.flip_h = move_direction.x < 0
 					asprite.flip_h = move_direction.x < 0
-				#else:
-				#	scale.x = abs(scale.x) # Face right
 	else:
 		idle_timer -= delta
 		if idle_timer <= 0:
-			# Start moving in a random direction - HORIZONTAL ONLY
 			is_moving = true
-			move_timer = randf_range(0.5, 2.0) # Random movement time between 0.5-2 seconds
+			move_timer = randf_range(0.5, 2.0) 
 			
-			# Choose a random horizontal direction (left or right)
-			# 50% chance of going left, 50% chance of going right
 			var direction = 1 if randf() > 0.5 else -1
 			move_direction = Vector2(direction, 0).normalized()
 			
@@ -481,22 +333,16 @@ func handleAutonomousMovement(delta):
 			asprite.play("walk")
 			play_animation("walk")
 
-# Play animation
 func play_animation(anim_name):
-	# Handle animations
 	if has_node("AnimatedSprite2D"):
 		var animated_sprite = get_node("AnimatedSprite2D")
 		if anim_name == "happy":
-			animated_sprite.modulate = Color(0.8, 1.0, 0.8) # Green tint
-			animated_sprite.speed_scale = 2.0 # Speed up
+			animated_sprite.modulate = Color(0.8, 1.0, 0.8)
 		elif anim_name == "angry":
-			animated_sprite.modulate = Color(1.0, 0.6, 0.6) # Red tint
-			animated_sprite.speed_scale = 1.5 # Speed up
-		else: # neutral
-			animated_sprite.modulate = Color(1.0, 1.0, 1.0) # Normal
-			animated_sprite.speed_scale = 1.0
+			animated_sprite.modulate = Color(1.0, 0.6, 0.6)
+		else:
+			animated_sprite.modulate = Color(1.0, 1.0, 1.0)
 			
-		# Create a tween to reset the modulate after animation
 		var tween = create_tween()
 		tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1), 2.0)
 
