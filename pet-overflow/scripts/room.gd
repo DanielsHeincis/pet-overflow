@@ -20,8 +20,8 @@ var active_objects = []
 # Pet references
 var pet_scenes = {
 	"pupols": preload("res://scenes/pets/pupols.tscn"),
-	"julija": preload("res://scenes/pets/julija.tscn"),
-	"time": preload("res://scenes/pets/time.tscn"),
+	# "julija": preload("res://scenes/pets/julija.tscn"),
+	# "time": preload("res://scenes/pets/time.tscn"),
 	"toaster": preload("res://scenes/pets/toaster.tscn"),
 	"wet_owl": preload("res://scenes/pets/wet_owl.tscn")
 }
@@ -31,16 +31,11 @@ var object_scenes = {}
 
 # Object spawn rates (higher number = more likely to spawn)
 var object_spawn_rates = {
-	"bath": 0.5,  # Less common since it's a special zone
-	"water_glass": 0.5,
+	"sink": 0.5,
 	"card_deck": 0.5,
-	"gameboy": 0.5,
-	"hour_glass": 0.5,
-	"jam_jar": 0.5,
-	"outside_door": 0.5,
-	"puddle": 0.5,
-	"toast": 0.5,
-	"wooden_spoon": 0.5
+	"hourglass": 0.5,
+	"jar": 0.5,
+	"door": 0.5,
 }
 
 # Spawn points
@@ -54,8 +49,8 @@ var object_spawn_timer: Timer
 # Spawn rates for pets (higher number = more likely to spawn)
 var pet_spawn_rates = {
 	"pupols": 1.0,
-	"julija": 0.7,
-	"time": 0.5,
+	# "julija": 0.7,
+	# "time": 0.5,
 	"toaster": 0.3,
 	"wet_owl": 0.2  # Rare special pet
 }
@@ -136,7 +131,7 @@ func spawn_random_pet():
 	var roll = randf() * total_rate
 	var current_sum = 0
 	var chosen_pet = available_pets[0]  # Default
-	
+	 
 	for pet in available_pets:
 		current_sum += pet_spawn_rates[pet]
 		if roll < current_sum:
@@ -174,16 +169,11 @@ func spawn_random_pet():
 
 func load_object_scenes():
 	# Load scenes manually to avoid preload errors
-	object_scenes["bath"] = load("res://scenes/objects/bath.tscn")
-	object_scenes["water_glass"] = load("res://scenes/objects/water_glass.tscn")
+	object_scenes["sink"] = load("res://scenes/objects/sink.tscn")
 	object_scenes["card_deck"] = load("res://scenes/objects/card_deck.tscn")
-	object_scenes["gameboy"] = load("res://scenes/objects/gameboy.tscn")
-	object_scenes["hour_glass"] = load("res://scenes/objects/hour_glass.tscn")
-	object_scenes["jam_jar"] = load("res://scenes/objects/jam_jar.tscn")
-	object_scenes["outside_door"] = load("res://scenes/objects/outside_door.tscn")
-	object_scenes["puddle"] = load("res://scenes/objects/puddle.tscn")
-	object_scenes["toast"] = load("res://scenes/objects/toast.tscn")
-	object_scenes["wooden_spoon"] = load("res://scenes/objects/wooden_spoon.tscn")
+	object_scenes["hourglass"] = load("res://scenes/objects/hourglass.tscn")
+	object_scenes["jar"] = load("res://scenes/objects/jar.tscn")
+	object_scenes["door"] = load("res://scenes/objects/door.tscn")
 
 
 

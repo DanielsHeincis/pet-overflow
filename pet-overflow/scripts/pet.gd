@@ -11,9 +11,6 @@ var preferred_objects = []  # Objects that satisfy this pet
 var forbidden_objects = []  # Objects that make pet angry
 
 # GIF animation properties
-var interaction_gif: String = "ytuh.gif"  # Default interaction GIF
-var game_over_gif: String = "skeleton-burning.gif"  # Default game over GIF
-var good_game_over_gif: String = "catkill.gif"  # Default game over GIF
 var gif_duration: float = 3.0  # Default duration in seconds
 var gif_player: AnimatedSprite2D = null  # AnimatedSprite2D for playing GIFs
 
@@ -196,42 +193,24 @@ func setup_pet_gifs():
 	bad_death_scene = load("res://scenes/death/toster_good.tscn")  # You may want to create a toster_bad.tscn
 	
 	if pet_type == "WetOwl":
-		interaction_gif = "ytuh.gif"
-		game_over_gif = "skeleton-burning.gif"
-		good_game_over_gif = "catkill.gif"
 		gif_duration = 4.0  # Longer duration
 		
 	elif pet_type == "Pupols":
-		interaction_gif = "catkill.gif"
-		game_over_gif = "skeleton-burning.gif"
-		good_game_over_gif = "catkill.gif"
 		gif_duration = 2.5  # Medium duration
 		# For Pupols, use the pupols_good scene
 		if ResourceLoader.exists("res://scenes/death/pupols_good.tscn"):
 			good_death_scene = load("res://scenes/death/pupols_good.tscn")
 		
-	elif pet_type == "Julija":
-		interaction_gif = "ytuh.gif"
-		game_over_gif = "catkill.gif"
-		good_game_over_gif = "catkill.gif"
-		gif_duration = 3.0  # Default duration
+	# elif pet_type == "Julija":
+	# 	gif_duration = 3.0  # Default duration
 		
 	elif pet_type == "Toster":
-		interaction_gif = "ytuh.gif"
-		game_over_gif = "catkill.gif"
-		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
 		
-	elif pet_type == "ConceptOfTime":
-		interaction_gif = "ytuh.gif"
-		game_over_gif = "catkill.gif"
-		good_game_over_gif = "catkill.gif"
-		gif_duration = 3.0  # Default duration
+	# elif pet_type == "ConceptOfTime":
+	# 	gif_duration = 3.0  # Default duration
 		
 	else:
-		interaction_gif = "ytuh.gif"
-		game_over_gif = "catkill.gif"
-		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
 
 # Setup GIF player for animations
@@ -245,34 +224,6 @@ func setup_gif_player():
 		gif_player.scale = Vector2(1.5, 1.5)  # Scale up for visibility
 		add_child(gif_player)
 
-# Play a GIF animation
-func play_gif(gif_type = "interaction"):
-	if not gif_player:
-		print("no gif player")
-		return
-	
-	# Determine which GIF to play
-	var gif_path = "res://assets/"
-	if gif_type == "interaction":
-		gif_path += interaction_gif
-	elif gif_type == "good_game_over":
-		gif_path += good_game_over_gif
-	else:  # game_over
-		gif_path += game_over_gif
-
-	print("playing gif: " + gif_path)
-	
-	# Load the GIF as SpriteFrames
-	var frames = load_gif_frames(gif_path)
-	if frames:
-		print("loaded gif frames")
-		gif_player.sprite_frames = frames
-		gif_player.play("default")
-		gif_player.visible = true
-		
-		# Hide the GIF after a delay
-		await get_tree().create_timer(gif_duration).timeout
-		gif_player.visible = false
 
 # Play an animation scene
 func play_animation_scene(animation_type = "interaction"):
