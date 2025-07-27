@@ -1,29 +1,128 @@
-[gd_scene load_steps=23 format=3 uid="uid://fr7eyhnq08rb"]
+[gd_scene load_steps=51 format=3 uid="uid://fr7eyhnq08rb"]
 
+[ext_resource type="Texture2D" uid="uid://b85lyw6176lib" path="res://assets/animations/toaster/bad death/toaster_bad_death-1.png" id="1_fq76l"]
 [ext_resource type="Texture2D" uid="uid://dfwa3wfrqxo2x" path="res://assets/animations/toaster/good death/toaster_good_death-1.png" id="1_tljfg"]
+[ext_resource type="Texture2D" uid="uid://bblesi1onjpja" path="res://assets/animations/toaster/bad death/toaster_bad_death-2.png" id="2_p1bla"]
 [ext_resource type="Texture2D" uid="uid://cvb7gr22ysgei" path="res://assets/animations/toaster/good death/toaster_good_death-2.png" id="2_xh84m"]
+[ext_resource type="Texture2D" uid="uid://cxv1dqh7djg5n" path="res://assets/animations/toaster/bad death/toaster_bad_death-3.png" id="3_4ki4e"]
 [ext_resource type="Texture2D" uid="uid://chh4xuclsg1no" path="res://assets/animations/toaster/good death/toaster_good_death-3.png" id="3_inttc"]
 [ext_resource type="Texture2D" uid="uid://ir1ibu7sgp25" path="res://assets/animations/toaster/good death/toaster_good_death-4.png" id="4_4bv7f"]
+[ext_resource type="Texture2D" uid="uid://bslu0icux8d7r" path="res://assets/animations/toaster/bad death/toaster_bad_death-4.png" id="4_nseux"]
 [ext_resource type="Texture2D" uid="uid://c100foh3g3qto" path="res://assets/animations/toaster/good death/toaster_good_death-5.png" id="5_dsame"]
+[ext_resource type="Texture2D" uid="uid://cs4f7q5tnyned" path="res://assets/animations/toaster/bad death/toaster_bad_death-5.png" id="5_utvcp"]
 [ext_resource type="Texture2D" uid="uid://c44ho6mnmqxd1" path="res://assets/animations/toaster/good death/toaster_good_death-6.png" id="6_w3h3h"]
+[ext_resource type="Texture2D" uid="uid://rp4oirb6otkg" path="res://assets/animations/toaster/bad death/toaster_bad_death-6.png" id="6_w03pb"]
 [ext_resource type="Texture2D" uid="uid://dkxfd78q3ef4j" path="res://assets/animations/toaster/good death/toaster_good_death-7.png" id="7_6tr2a"]
+[ext_resource type="Texture2D" uid="uid://phdxxn4wh6gi" path="res://assets/animations/toaster/bad death/toaster_bad_death-7.png" id="7_vqp2i"]
 [ext_resource type="Texture2D" uid="uid://bwo2wgi8vjp8o" path="res://assets/animations/toaster/good death/toaster_good_death-8.png" id="8_ik41q"]
+[ext_resource type="Texture2D" uid="uid://4qdda1hv78qn" path="res://assets/animations/toaster/bad death/toaster_bad_death-8.png" id="8_qsder"]
 [ext_resource type="Texture2D" uid="uid://81p0v8jgxgtg" path="res://assets/animations/toaster/good death/toaster_good_death-9.png" id="9_d2wlf"]
+[ext_resource type="Texture2D" uid="uid://jgo8h4pkjht7" path="res://assets/animations/toaster/bad death/toaster_bad_death-9.png" id="9_s0yr8"]
 [ext_resource type="Texture2D" uid="uid://dprreuhop0u35" path="res://assets/animations/toaster/good death/toaster_good_death-10.png" id="10_kteqy"]
+[ext_resource type="Texture2D" uid="uid://def0whfsqynyl" path="res://assets/animations/toaster/bad death/toaster_bad_death-10.png" id="10_sehvk"]
 [ext_resource type="Texture2D" uid="uid://bo38npgf1wxd" path="res://assets/animations/toaster/good death/toaster_good_death-11.png" id="11_05m5h"]
+[ext_resource type="Texture2D" uid="uid://ck6fcm4ykv0jv" path="res://assets/animations/toaster/bad death/toaster_bad_death-11.png" id="11_tiqqb"]
 [ext_resource type="Texture2D" uid="uid://n5rhnbr3qd0y" path="res://assets/animations/toaster/good death/toaster_good_death-12.png" id="12_pvlae"]
+[ext_resource type="Texture2D" uid="uid://qm844bj3wtwp" path="res://assets/animations/toaster/bad death/toaster_bad_death-12.png" id="12_wxv0q"]
 [ext_resource type="Texture2D" uid="uid://cp0sdbvnpsyq0" path="res://assets/animations/toaster/good death/toaster_good_death-13.png" id="13_e1x7u"]
+[ext_resource type="Texture2D" uid="uid://dvi6lbjvxpawy" path="res://assets/animations/toaster/bad death/toaster_bad_death-13.png" id="13_fag07"]
 [ext_resource type="Texture2D" uid="uid://ss37flfe6fhb" path="res://assets/animations/toaster/good death/toaster_good_death-14.png" id="14_myt7w"]
+[ext_resource type="Texture2D" uid="uid://dnkirfpxm0j3t" path="res://assets/animations/toaster/bad death/toaster_bad_death-14.png" id="14_xydsw"]
 [ext_resource type="Texture2D" uid="uid://51gd32vygnk0" path="res://assets/animations/toaster/good death/toaster_good_death-15.png" id="15_co7xl"]
+[ext_resource type="Texture2D" uid="uid://de3rddor8mmsu" path="res://assets/animations/toaster/bad death/toaster_bad_death-15.png" id="15_xau0n"]
 [ext_resource type="Texture2D" uid="uid://btxh1e5ucfuix" path="res://assets/animations/toaster/good death/toaster_good_death-16.png" id="16_ddn5d"]
+[ext_resource type="Texture2D" uid="uid://bsk8nwb020y4o" path="res://assets/animations/toaster/bad death/toaster_bad_death-16.png" id="16_yatdg"]
 [ext_resource type="Texture2D" uid="uid://bosydow1rjqm2" path="res://assets/animations/toaster/good death/toaster_good_death-17.png" id="17_6crra"]
+[ext_resource type="Texture2D" uid="uid://dam8eh7stnmrk" path="res://assets/animations/toaster/bad death/toaster_bad_death-17.png" id="17_jom2i"]
+[ext_resource type="Texture2D" uid="uid://di0kpninu4wns" path="res://assets/animations/toaster/bad death/toaster_bad_death-18.png" id="18_cg1k7"]
 [ext_resource type="Texture2D" uid="uid://n1exvy3pvk7o" path="res://assets/animations/toaster/good death/toaster_good_death-18.png" id="18_l8l8g"]
+[ext_resource type="Texture2D" uid="uid://dfs6np76lye3c" path="res://assets/animations/toaster/bad death/toaster_bad_death-19.png" id="19_63tqr"]
 [ext_resource type="Texture2D" uid="uid://cnykltykrn2o8" path="res://assets/animations/toaster/good death/toaster_good_death-19.png" id="19_tbvh4"]
 [ext_resource type="Texture2D" uid="uid://byfq1p5et2j04" path="res://assets/animations/toaster/good death/toaster_good_death-20.png" id="20_6x4tv"]
+[ext_resource type="Texture2D" uid="uid://cl76ffc56xku6" path="res://assets/animations/toaster/bad death/toaster_bad_death-20.png" id="20_wfn0a"]
 [ext_resource type="Texture2D" uid="uid://j77g06otup24" path="res://assets/animations/toaster/good death/toaster_good_death-21.png" id="21_40gii"]
+[ext_resource type="Texture2D" uid="uid://cionog3pfo0ey" path="res://assets/animations/toaster/bad death/toaster_bad_death-21.png" id="21_lsfne"]
+[ext_resource type="Texture2D" uid="uid://baf2j86fogsba" path="res://assets/animations/toaster/bad death/toaster_bad_death-22.png" id="22_2l75m"]
+[ext_resource type="Texture2D" uid="uid://ba7gp36ktivij" path="res://assets/animations/toaster/satisfy/toaster_satisfy-1.png" id="44_4mpro"]
+[ext_resource type="Texture2D" uid="uid://cjkma3gpyh20e" path="res://assets/animations/toaster/satisfy/toaster_satisfy-2.png" id="45_t4ych"]
+[ext_resource type="Texture2D" uid="uid://bv06n6j0gu7lu" path="res://assets/animations/toaster/satisfy/toaster_satisfy-3.png" id="46_bah06"]
+[ext_resource type="Texture2D" uid="uid://ul57qftww1el" path="res://assets/animations/toaster/satisfy/toaster_satisfy-4.png" id="47_vi5m7"]
+[ext_resource type="Texture2D" uid="uid://tedhlohykg7d" path="res://assets/animations/toaster/satisfy/toaster_satisfy-5.png" id="48_wskpn"]
+[ext_resource type="Texture2D" uid="uid://cku35pks5xw5m" path="res://assets/animations/toaster/satisfy/toaster_satisfy-6.png" id="49_1s852"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jstr0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fq76l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p1bla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4ki4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nseux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_utvcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_w03pb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vqp2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qsder")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s0yr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sehvk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tiqqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wxv0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fag07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xydsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xau0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yatdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_jom2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cg1k7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_63tqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_wfn0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_lsfne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_2l75m")
+}],
+"loop": true,
+"name": &"bad",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_tljfg")
@@ -89,14 +188,37 @@ animations = [{
 "texture": ExtResource("21_40gii")
 }],
 "loop": true,
-"name": &"default",
+"name": &"good",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_4mpro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_t4ych")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_bah06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_vi5m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_wskpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_1s852")
+}],
+"loop": true,
+"name": &"interaction",
 "speed": 5.0
 }]
 
 [node name="TosterGood" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(582, 332)
 scale = Vector2(0.71875, 0.71875)
 sprite_frames = SubResource("SpriteFrames_jstr0")
-frame_progress = 0.527989
+animation = &"interaction"
+frame_progress = 0.310616

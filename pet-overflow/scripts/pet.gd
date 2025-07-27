@@ -17,6 +17,12 @@ var good_game_over_gif: String = "catkill.gif"  # Default game over GIF
 var gif_duration: float = 3.0  # Default duration in seconds
 var gif_player: AnimatedSprite2D = null  # AnimatedSprite2D for playing GIFs
 
+# Death scene animations
+var interaction_scene: PackedScene = null  # Scene to play during interactions
+var good_death_scene: PackedScene = null  # Scene to play when satisfaction is full
+var bad_death_scene: PackedScene = null   # Scene to play when wrath is full
+var current_animation_instance = null     # Track current playing animation
+
 # Meters
 var satisfaction_level: float = 0  # 0-100
 var wrath_level: float = 0  # 0-100
@@ -38,10 +44,6 @@ var animation_player: AnimationPlayer = null
 # UI components
 var satisfaction_meter: ProgressBar = null
 var wrath_meter: ProgressBar = null
-
-# Death scenes
-var good_death_scene: String = ""  # Scene to play when satisfaction is full
-var bad_death_scene: String = ""   # Scene to play when wrath is full
 
 
 # Called when the node enters the scene tree for the first time.
@@ -188,58 +190,49 @@ func setup_collision():
 func setup_pet_gifs():
 	# Assign different GIFs and durations based on pet type
 	
+	# Default animation scenes for all pets
+	interaction_scene = load("res://scenes/death/toster_good.tscn")
+	good_death_scene = load("res://scenes/death/toster_good.tscn")
+	bad_death_scene = load("res://scenes/death/toster_good.tscn")  # You may want to create a toster_bad.tscn
+	
 	if pet_type == "WetOwl":
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "skeleton-burning.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 4.0  # Longer duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Use appropriate scene
-		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
-	
+		
 	elif pet_type == "Pupols":
 		interaction_gif = "catkill.gif"
 		game_over_gif = "skeleton-burning.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 2.5  # Medium duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/pupols_good.tscn"
-		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
-	
+		# For Pupols, use the pupols_good scene
+		if ResourceLoader.exists("res://scenes/death/pupols_good.tscn"):
+			good_death_scene = load("res://scenes/death/pupols_good.tscn")
+		
 	elif pet_type == "Julija":
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "catkill.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
-		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
-
+		
 	elif pet_type == "Toster":
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "catkill.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
-		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
-
+		
 	elif pet_type == "ConceptOfTime":
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "catkill.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/concept_of_time_good.tscn"  # Create this scene
-		bad_death_scene = "res://scenes/death/concept_of_time_bad.tscn"    # Create this scene
+		
 	else:
 		interaction_gif = "ytuh.gif"
 		game_over_gif = "catkill.gif"
 		good_game_over_gif = "catkill.gif"
 		gif_duration = 3.0  # Default duration
-		# Death scenes
-		good_death_scene = "res://scenes/death/pupols_good.tscn"  # Create this scene
-		bad_death_scene = "res://scenes/death/pupols_good.tscn"    # Create this scene
 
 # Setup GIF player for animations
 func setup_gif_player():
@@ -262,6 +255,8 @@ func play_gif(gif_type = "interaction"):
 	var gif_path = "res://assets/"
 	if gif_type == "interaction":
 		gif_path += interaction_gif
+	elif gif_type == "good_game_over":
+		gif_path += good_game_over_gif
 	else:  # game_over
 		gif_path += game_over_gif
 
@@ -272,13 +267,60 @@ func play_gif(gif_type = "interaction"):
 	if frames:
 		print("loaded gif frames")
 		gif_player.sprite_frames = frames
-		gif_player.visible = true
 		gif_player.play("default")
+		gif_player.visible = true
 		
-		# Hide after duration
+		# Hide the GIF after a delay
 		await get_tree().create_timer(gif_duration).timeout
 		gif_player.visible = false
-		gif_player.stop()
+
+# Play an animation scene
+func play_animation_scene(animation_type = "interaction"):
+	# Clean up any existing animation instance
+	if current_animation_instance != null and is_instance_valid(current_animation_instance):
+		current_animation_instance.queue_free()
+		current_animation_instance = null
+	
+	# Determine which scene to instantiate
+	var scene_to_use = null
+	if animation_type == "interaction":
+		scene_to_use = interaction_scene
+	elif animation_type == "good_death":
+		scene_to_use = good_death_scene
+	elif animation_type == "bad_death":
+		scene_to_use = bad_death_scene
+	
+	if scene_to_use:
+		# Instantiate the scene
+		var instance = scene_to_use.instantiate()
+		
+		# Position it above the pet
+		instance.position = Vector2(0, -60)
+		
+		# Add it as a child of this pet
+		add_child(instance)
+		
+		# Store reference to the instance
+		current_animation_instance = instance
+		
+		# Play the appropriate animation
+		if instance.has_node("AnimatedSprite2D"):
+			var anim_sprite = instance.get_node("AnimatedSprite2D")
+			if animation_type == "interaction":
+				anim_sprite.play("interaction")
+			elif animation_type == "good_death":
+				anim_sprite.play("good")
+			elif animation_type == "bad_death":
+				anim_sprite.play("bad")
+			
+			# Set up a timer to remove the animation after it plays
+			var timer = get_tree().create_timer(3.0)
+			await timer.timeout
+			
+			# Clean up the animation
+			if current_animation_instance != null and is_instance_valid(current_animation_instance):
+				current_animation_instance.queue_free()
+				current_animation_instance = null
 	else:
 		print("failed to load gif frames")
 
@@ -424,8 +466,9 @@ func interact_with_object(object):
 	is_interacting = true
 	print("interacting")
 	print(object.name)
-	# Play the interaction GIF animation
-	play_gif("interaction")
+	
+	# Play the interaction animation scene
+	play_animation_scene("interaction")
 	
 	if object.name in preferred_objects:
 		print("satisfaction increse")

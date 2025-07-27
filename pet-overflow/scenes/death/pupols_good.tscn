@@ -32,6 +32,16 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgk1w"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"bad",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"good",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_qgdk6")
@@ -121,14 +131,13 @@ animations = [{
 "texture": ExtResource("29_uonm4")
 }],
 "loop": true,
-"name": &"default",
+"name": &"interaction",
 "speed": 5.0
 }]
 
 [node name="PupolsGood" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(564, 281)
 scale = Vector2(0.70375, 0.70375)
 sprite_frames = SubResource("SpriteFrames_fgk1w")
-frame_progress = 0.913942
+animation = &"interaction"
