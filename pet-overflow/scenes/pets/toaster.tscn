@@ -1,14 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://dalkd5hoflb7v"]
+[gd_scene load_steps=23 format=3 uid="uid://dalkd5hoflb7v"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_e5r1s"]
 [ext_resource type="Texture2D" uid="uid://yxa0gi26jrul" path="res://assets/characters/static emotions/toaster/toaster_angry.png" id="2_ooqru"]
 [ext_resource type="Texture2D" uid="uid://cdxrlnxqjvb52" path="res://assets/characters/static emotions/toaster/toaster_neutral.png" id="3_4oo3m"]
 [ext_resource type="Texture2D" uid="uid://o8mxq7q8clgn" path="res://assets/characters/static emotions/toaster/toaster_happy.png" id="4_ebjqt"]
+[ext_resource type="Texture2D" uid="uid://ba7gp36ktivij" path="res://assets/animations/toaster/satisfy/toaster_satisfy-1.png" id="4_vp0ly"]
+[ext_resource type="Texture2D" uid="uid://cjkma3gpyh20e" path="res://assets/animations/toaster/satisfy/toaster_satisfy-2.png" id="5_e8t7b"]
 [ext_resource type="Texture2D" uid="uid://b2y66bovmimtx" path="res://assets/characters/walk cycles/toaster/toaster_walk-1.png" id="5_tmm4x"]
+[ext_resource type="Texture2D" uid="uid://bv06n6j0gu7lu" path="res://assets/animations/toaster/satisfy/toaster_satisfy-3.png" id="6_tbwqd"]
 [ext_resource type="Texture2D" uid="uid://bjogdnp3h6w6b" path="res://assets/characters/walk cycles/toaster/toaster_walk-2.png" id="6_yw0ye"]
+[ext_resource type="Texture2D" uid="uid://ul57qftww1el" path="res://assets/animations/toaster/satisfy/toaster_satisfy-4.png" id="7_gr5yn"]
 [ext_resource type="Texture2D" uid="uid://b4ndjo3ca0q7" path="res://assets/characters/walk cycles/toaster/toaster_walk-3.png" id="7_nhegt"]
+[ext_resource type="Texture2D" uid="uid://tedhlohykg7d" path="res://assets/animations/toaster/satisfy/toaster_satisfy-5.png" id="8_nlqm8"]
 [ext_resource type="Texture2D" uid="uid://cq7qierfqykp8" path="res://assets/characters/walk cycles/toaster/toaster_walk-4.png" id="8_srpsa"]
 [ext_resource type="Texture2D" uid="uid://cnojog5i3gbdv" path="res://assets/characters/walk cycles/toaster/toaster_walk-5.png" id="9_1d2d8"]
+[ext_resource type="Texture2D" uid="uid://cku35pks5xw5m" path="res://assets/animations/toaster/satisfy/toaster_satisfy-6.png" id="9_1r6od"]
 [ext_resource type="Texture2D" uid="uid://bxtj5pvhitot4" path="res://assets/characters/walk cycles/toaster/toaster_walk-6.png" id="10_m2b3p"]
 [ext_resource type="Texture2D" uid="uid://66vd4ml3qak0" path="res://assets/characters/walk cycles/toaster/toaster_walk-7.png" id="11_vp0ly"]
 [ext_resource type="Texture2D" uid="uid://dr62a8q6a855q" path="res://assets/characters/walk cycles/toaster/toaster_walk-8.png" id="12_e8t7b"]
@@ -54,6 +60,29 @@ animations = [{
 "loop": true,
 "name": &"happy",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vp0ly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e8t7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tbwqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gr5yn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nlqm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1r6od")
+}],
+"loop": true,
+"name": &"interaction",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -117,9 +146,7 @@ horizontal_alignment = 1
 position = Vector2(-18, 12)
 scale = Vector2(0.07975, 0.07975)
 sprite_frames = SubResource("SpriteFrames_6rh4p")
-animation = &"walk"
-frame = 7
-frame_progress = 0.44049
+animation = &"happy"
 
 [node name="Body" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -40.0

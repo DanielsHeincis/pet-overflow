@@ -1,13 +1,42 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqftxq0tofac3"]
+[gd_scene load_steps=41 format=3 uid="uid://dqftxq0tofac3"]
 
 [ext_resource type="Script" uid="uid://dt1crload4fy3" path="res://scripts/pet.gd" id="1_uflgu"]
 [ext_resource type="Texture2D" uid="uid://70pbn37e4aff" path="res://assets/characters/static emotions/pupols/big/pupols_angry.png" id="2_21y5v"]
 [ext_resource type="Texture2D" uid="uid://uvo0koarg72u" path="res://assets/characters/walk cycles/pupols/pupols_walk-1.png" id="2_ao2qh"]
 [ext_resource type="Texture2D" uid="uid://6ce5n26i7dt6" path="res://assets/characters/walk cycles/pupols/pupols_walk-2.png" id="3_g8uuq"]
 [ext_resource type="Texture2D" uid="uid://bdbqc5dmemwb6" path="res://assets/characters/static emotions/pupols/big/pupols_happy.png" id="3_jed32"]
+[ext_resource type="Texture2D" uid="uid://cwmwe732mcmkm" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-1.png" id="4_4wtuq"]
 [ext_resource type="Texture2D" uid="uid://ckixsfi4i08bf" path="res://assets/characters/walk cycles/pupols/pupols_walk-3.png" id="4_6krld"]
 [ext_resource type="Texture2D" uid="uid://bef8v3e63vxci" path="res://assets/characters/static emotions/pupols/big/pupols_neutral.png" id="4_81nxn"]
 [ext_resource type="Texture2D" uid="uid://dbvbtdw8rsx2k" path="res://assets/characters/walk cycles/pupols/pupols_walk-4.png" id="5_21y5v"]
+[ext_resource type="Texture2D" uid="uid://bep6rol8qny5y" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-2.png" id="5_a4ogp"]
+[ext_resource type="Texture2D" uid="uid://cqxsknwhqxa0v" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-3.png" id="6_26440"]
+[ext_resource type="Texture2D" uid="uid://ca5g8peyi35q6" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-4.png" id="7_7l03e"]
+[ext_resource type="Texture2D" uid="uid://dv5g4gnipwoek" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-5.png" id="8_jaqqk"]
+[ext_resource type="Texture2D" uid="uid://bex8juj0c6iqx" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-6.png" id="9_6pyhw"]
+[ext_resource type="Texture2D" uid="uid://dlymtb0qrpeug" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-7.png" id="10_3nbpd"]
+[ext_resource type="Texture2D" uid="uid://b7gf1nb2qkhc2" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-8.png" id="11_6eu7f"]
+[ext_resource type="Texture2D" uid="uid://bs6rfsoymp587" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-9.png" id="12_smcfj"]
+[ext_resource type="Texture2D" uid="uid://k2vg0h66c1gc" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-10.png" id="13_ixsfj"]
+[ext_resource type="Texture2D" uid="uid://bn5p21ypw0k7k" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-11.png" id="14_ocmmr"]
+[ext_resource type="Texture2D" uid="uid://cc23yfgfc5ta" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-12.png" id="15_x3yrd"]
+[ext_resource type="Texture2D" uid="uid://n0j1anpvejc5" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-13.png" id="16_456md"]
+[ext_resource type="Texture2D" uid="uid://dl5mlvoegkpdx" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-14.png" id="17_cem4x"]
+[ext_resource type="Texture2D" uid="uid://ckwvcjwmg5dh0" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-15.png" id="18_ba72j"]
+[ext_resource type="Texture2D" uid="uid://dfn3qy3bvo6wt" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-16.png" id="19_7j37d"]
+[ext_resource type="Texture2D" uid="uid://csp7frk7jwtv5" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-17.png" id="20_1x2ek"]
+[ext_resource type="Texture2D" uid="uid://bielaktuxmv5h" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-18.png" id="21_bvp6c"]
+[ext_resource type="Texture2D" uid="uid://bgj2gldl3rhnt" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-19.png" id="22_nguwe"]
+[ext_resource type="Texture2D" uid="uid://8nn7k1kok3xf" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-20.png" id="23_5vlfg"]
+[ext_resource type="Texture2D" uid="uid://b3i5ys4l467ed" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-21.png" id="24_7jpc7"]
+[ext_resource type="Texture2D" uid="uid://bgjayqnv1qg7b" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-22.png" id="25_f3fkr"]
+[ext_resource type="Texture2D" uid="uid://d0icj2btfveuj" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-23.png" id="26_tmgwy"]
+[ext_resource type="Texture2D" uid="uid://cpvlm1ti3uc45" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-24.png" id="27_nm211"]
+[ext_resource type="Texture2D" uid="uid://w715dh00wuvf" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-25.png" id="28_8dqsx"]
+[ext_resource type="Texture2D" uid="uid://dqww4nbv65rw8" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-26.png" id="29_yd085"]
+[ext_resource type="Texture2D" uid="uid://sseuahue0ohv" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-27.png" id="30_5j33m"]
+[ext_resource type="Texture2D" uid="uid://c6r71yg1a0y6w" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-28.png" id="31_jqy5j"]
+[ext_resource type="Texture2D" uid="uid://46bfnqmbkcuy" path="res://assets/animations/pupols/pupols_satisfaction/pupols_satisfy-29.png" id="32_7y5m3"]
 
 [sub_resource type="GDScript" id="GDScript_pupols"]
 script/source = "extends Node
@@ -49,6 +78,98 @@ animations = [{
 }],
 "loop": true,
 "name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4wtuq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a4ogp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_26440")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7l03e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jaqqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6pyhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3nbpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6eu7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_smcfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ixsfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ocmmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_x3yrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_456md")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_cem4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ba72j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_7j37d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1x2ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_bvp6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_nguwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_5vlfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_7jpc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_f3fkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_tmgwy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_nm211")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_8dqsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_yd085")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_5j33m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_jqy5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_7y5m3")
+}],
+"loop": true,
+"name": &"interaction",
 "speed": 5.0
 }, {
 "frames": [{
@@ -113,7 +234,7 @@ show_percentage = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.0653333, 0.0653333)
 sprite_frames = SubResource("SpriteFrames_jed32")
-animation = &"walk"
+animation = &"interaction"
 
 [connection signal="mouse_entered" from="." to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Area2D_mouse_exited"]

@@ -9,6 +9,7 @@ var hates_being_moved: bool = false # Some pets hate being moved
 var moves_by_itself: bool = false # Some pets move on their own
 var preferred_objects = []  # Objects that satisfy this pet
 var forbidden_objects = []  # Objects that make pet angry
+var asprite = null
 
 # GIF animation properties
 var gif_duration: float = 3.0  # Default duration in seconds
@@ -437,16 +438,18 @@ func interact_with_object(object):
 	is_interacting = false
 
 func handleAutonomousMovement(delta):
+	var asprite = get_node("AnimatedSprite2D")
 	if is_moving:
 		move_timer -= delta
 		if move_timer <= 0:
 			is_moving = false
 			idle_timer = randf_range(1.0, 4.0)
 			play_animation("idle")
+			asprite.play("neutral")
 		else:
 			# Continue moving in the current direction - HORIZONTAL ONLY
 			# Y position stays the same to keep pet on the ground
-			$AnimatedSprite2D.play("walk")
+			asprite.play("walk")
 			global_position.x += move_direction.x * delta * 50 # Movement speed
 			
 			# Keep pet within room bounds
@@ -458,7 +461,8 @@ func handleAutonomousMovement(delta):
 				if has_node("Sprite2D"):
 					$Sprite2D.flip_h = move_direction.x < 0
 				elif has_node("AnimatedSprite2D"):
-					$AnimatedSprite2D.flip_h = move_direction.x < 0
+					#$AnimatedSprite2D.flip_h = move_direction.x < 0
+					asprite.flip_h = move_direction.x < 0
 				#else:
 				#	scale.x = abs(scale.x) # Face right
 	else:
@@ -472,6 +476,9 @@ func handleAutonomousMovement(delta):
 			# 50% chance of going left, 50% chance of going right
 			var direction = 1 if randf() > 0.5 else -1
 			move_direction = Vector2(direction, 0).normalized()
+			
+			asprite = get_node("AnimatedSprite2D")
+			asprite.play("walk")
 			play_animation("walk")
 
 # Play animation
