@@ -370,10 +370,12 @@ func handleAutonomousMovement(delta):
 			
 			# Flip sprite based on movement direction
 			if has_node("Sprite") or has_node("AnimatedSprite2D"):
-				if move_direction.x < 0:
-					scale.x = -1 * abs(scale.x) # Face left
-				else:
-					scale.x = abs(scale.x) # Face right
+				if has_node("Sprite2D"):
+					$Sprite2D.flip_h = move_direction.x < 0
+				elif has_node("AnimatedSprite2D"):
+					$AnimatedSprite2D.flip_h = move_direction.x < 0
+				#else:
+				#	scale.x = abs(scale.x) # Face right
 	else:
 		idle_timer -= delta
 		if idle_timer <= 0:

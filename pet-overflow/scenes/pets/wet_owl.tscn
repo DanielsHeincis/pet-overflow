@@ -19,7 +19,8 @@ func _ready():
 	pet.preferred_objects = [\"water_glass\"]
 	pet.forbidden_objects = [\"bath\", \"card_deck\", \"gameboy\", \"hour_glass\", \"jam_jar\", \"outside_door\", \"toast\", \"wooden_spoon\"]
 	pet.satisfaction_decay_rate = 0.05
-	pet.wrath_increase_rate = 0.2"
+	pet.wrath_increase_rate = 0.2
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lamont"]
 animations = [{

@@ -8,7 +8,7 @@ TODO:
 - [ ] BUG: The act of drag and dropping is very laggy, can't properly pick up and let go.
 - [ ] BUG: Some random blue screen blocks that are not even objects or pets keep spawning.
 - [ ] BUG: If the blue stupid block is the same thing, then the unique pet spawning doesn't work.
-- [ ] BUG: Moving the screen with arrows doesn't work at all.
+- [X] BUG: Moving the screen with arrows doesn't work at all.
 - [ ] BUG: The owl doesn't seem to move at all, check if the right animation is played if the pet is in motion. - FIXED: Enabled autonomous movement for the wet owl.
 - [ ] BUG: Object doesn't disappear after interaction.
 

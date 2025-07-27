@@ -22,10 +22,11 @@ func _ready():
 	# To be implemented in the spawn manager
 	# Make sprite a nice purple color
 	if pet.has_node(\"Sprite/ColorRect\"):
-		pet.get_node(\"Sprite/ColorRect\").color = Color(0.6, 0.2, 0.8)"
+		pet.get_node(\"Sprite/ColorRect\").color = Color(0.6, 0.2, 0.8)
+"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_usvai"]
-radius = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6qut"]
+size = Vector2(104, 104)
 
 [node name="Julija" type="Area2D"]
 script = ExtResource("1_anhdg")
@@ -34,15 +35,15 @@ script = ExtResource("1_anhdg")
 script = SubResource("GDScript_julija")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -32.0
-offset_top = -65.0
-offset_right = 32.0
-offset_bottom = -39.0
+offset_left = -33.0
+offset_top = -83.0
+offset_right = 31.0
+offset_bottom = -57.0
 text = "Julija"
 horizontal_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_usvai")
+shape = SubResource("RectangleShape2D_g6qut")
 
 [node name="Sprite" type="Node2D" parent="."]
 
